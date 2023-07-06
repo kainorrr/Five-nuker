@@ -7,7 +7,6 @@
 3. Spam roles and channel with custom massage
 4. Spam in Spam channels with custom massage
 5. Ban everyone with custom reason
-6. And change prefix
 
 # All this with ONE command.
 
