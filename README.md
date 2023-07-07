@@ -18,7 +18,7 @@ btw i will fix it in new updates
 
 1. Spam with webhooks + no more global rate limits :)
 2. More variables so you can quickly customize bot as you want
-3. An optional function to make the bot play a game or stream, etc. with a custom name
+3. An optional function to make the bot play a game or stream, etc. with a custom name → Done!
 4. An optional function if server has boosts it will change server banner
 
 # Join my discord server for announcements:) → https://discord.gg/QTDXqt8PA8
