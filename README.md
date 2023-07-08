@@ -1,5 +1,6 @@
 # Discord Five nuker bot
 
+# v1.2 Added silent mode
 # v1.1 Added activities → info about it in my discord server
 
 # A nuker bot for discord that can....
