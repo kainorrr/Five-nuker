@@ -6,10 +6,11 @@ from asyncio import create_task
 
 
 prefix = '>' 
-token = 'ur bot token here'
+token = 'yo token here'
 spamtext = '@everyone @here\n Imagine get nuked by Five bot \n https://github.com/glitch65/Discord-Five-nuker-bot \n XD '
 ac_name="Five nuker on top"
-ac_type= 0
+ac_type= 1
+silent_mode= 0
 
 
 intents = Intents.default()
@@ -19,14 +20,17 @@ client = commands.Bot(command_prefix=prefix, help_command=None, intents=intents.
 
 @client.event
 async def on_ready():
-    if ac_type == 1:
+    if ac_type == 1 and silent_mode == 0:
         await client.change_presence(activity=discord.Game(name=ac_name))
-    elif ac_type == 2:
+    elif ac_type == 2 and silent_mode == 0:
         await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=ac_name))
-    elif ac_type == 3:
+    elif ac_type == 3 and silent_mode == 0:
         await client.change_presence(activity=discord.Streaming(name=ac_name, url='https://www.twitch.tv/discord'))
-    elif ac_type == 4:
+    elif ac_type == 4 and silent_mode == 0:
         await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=ac_name))
+    elif silent_mode == 1:
+        await client.change_presence(status=discord.Status.offline)
+
 
 
 
