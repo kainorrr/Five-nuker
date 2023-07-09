@@ -13,15 +13,15 @@
 
 # All this with ONE command.
 
-# !!! You can get a Global rate limit with this bot so I highly recommend running it with a VPN so you get it but you can get rid of it quickly !!!
+# ~~!!! You can get a Global rate limit with this bot so I highly recommend running it with a VPN so you get it but you can get rid of it quickly !!!~~
+> it has been fixed 
 
-btw i will fix it in new updates
 
 # in new updates will be added
 
-1. Spam with webhooks + no more global rate limits :)
+1. ~~Spam with webhooks + no more global rate limits :)~~ → Added!
 2. More variables so you can quickly customize bot as you want
-3. An optional function to make the bot play a game or stream, etc. with a custom name → Done!
+3. ~~An optional function to make the bot play a game or stream, etc. with a custom name~~ → Added!
 4. An optional function if server has boosts it will change server banner
 
 # Join my discord server for announcements and info :) → https://discord.gg/QTDXqt8PA8
