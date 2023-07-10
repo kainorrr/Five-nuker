@@ -8,7 +8,7 @@
 
 1. Rename Server & Add custom server icon
 2. Delete all Chanells and roles
-3. Spam roles and channel with custom massage
+3. Spam roles and channel with custom name
 4. Spam in Spam channels with custom massage
 5. Ban everyone with custom reason
 
