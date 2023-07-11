@@ -25,4 +25,4 @@
 3. ~~An optional function to make the bot play a game or stream, etc. with a custom name~~ → Added!
 4. An optional function if server has boosts it will change server banner
 
-# Join my discord server for announcements and info :) → https://discord.gg/QTDXqt8PA8
+# Join my discord server for announcements, info and tutorial how to use it :) → https://discord.gg/QTDXqt8PA8
