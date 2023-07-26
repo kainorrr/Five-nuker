@@ -2,7 +2,7 @@ from discord import Intents
 from discord.ext import commands
 from requests import put
 import discord
-from asyncio import create_task, wait 
+from asyncio import create_task
 from pathlib import Path
 import configparser
 import time
