@@ -15,9 +15,9 @@
 
 # All this with ONE command.
 
-# ~~!!! You can get a Global rate limit with this bot so I highly recommend running it with a VPN so you get it but you can get rid of it quickly !!!~~
-> it has been fixed 
+# Like my bot? then add a star to my repository and go to my discord server so you support me and help promote the bot  
 
+> https://discord.gg/QTDXqt8PA8 you can also find announcements, tutorials, information about the bot (exactly what is the ac type and ac name), or just chat with me or other server members 
 
 # in new updates will be added
 
@@ -26,4 +26,3 @@
 3. ~~An optional function to make the bot play a game or stream, etc. with a custom name~~ → Added!
 4. An optional function if server has boosts it will change server banner
 
-# Join my discord server for announcements, info, tutorial how to use it or if you want to support me :) → https://discord.gg/QTDXqt8PA8
