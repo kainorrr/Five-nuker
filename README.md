@@ -1,5 +1,6 @@
 # Discord Five nuker bot
 
+# v2.0pre2 added icon check
 # v2.0pre added configuration system and now nuker can be downloaded as a standalone program 
 # v1.3 Improved spam in spam channels + no more global rate
 # v1.2 Added silent mode 
