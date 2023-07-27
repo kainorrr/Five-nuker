@@ -2,7 +2,7 @@ from discord import Intents
 from discord.ext import commands
 from requests import put
 import discord
-from asyncio import create_task
+from asyncio import create_task, wait 
 from pathlib import Path
 import configparser
 import time
@@ -12,8 +12,20 @@ config = configparser.ConfigParser()
 
 
 
-ptf = 'cfg.ini'
-cfg = Path(ptf)
+ptfc = 'cfg.ini'
+pti = 'icon.PNG'
+cfg = Path(ptfc)
+ic = Path(pti)
+
+if ic.is_file():
+    f = open('icon.PNG', 'rb')
+    icona = f.read()
+else:
+    print('ERROR Icon not founded')
+    time.sleep(1)
+    print('Please add icon to bot folder and rename it to icon.PNG and restart program')
+    time.sleep(1)
+    quit()
 
 if cfg.is_file():
     print(f'Config founded!')
