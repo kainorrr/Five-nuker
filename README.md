@@ -1,4 +1,4 @@
-# Discord Five nuker bot
+# Discord Five nuker bot | Download here https://github.com/glitch65/Discord-Five-nuker-bot/releases
 
 # v2.0pre2 added icon check
 # v2.0pre added configuration system and now nuker can be downloaded as a standalone program 
