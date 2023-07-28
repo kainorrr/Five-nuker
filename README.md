@@ -16,7 +16,7 @@
 
 # All this with ONE command.
 
-# Like my bot? then add a star to my repository and go to my discord server so you support me and help promote the bot  
+# Like my bot? then add a star to my repository and join my discord server so you support me and help promote the bot  
 
 > https://discord.gg/QTDXqt8PA8 you can also find announcements, tutorials, information about the bot (exactly what is the ac type and ac name), or just chat with me or other server members 
 
