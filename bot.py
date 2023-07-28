@@ -111,7 +111,7 @@ async def on_ready():
         await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=ac_name))
     elif silent_mode == 1:
         await client.change_presence(status=discord.Status.offline)
-    rmm()
+    await rmm()
 
 async def killobject(obj):
     try: await obj.delete()
