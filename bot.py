@@ -3,6 +3,7 @@ from discord.ext import commands
 import discord
 from asyncio import create_task 
 from pathlib import Path
+from requests import put
 import configparser
 import time
 import colorama
