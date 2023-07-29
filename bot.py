@@ -66,9 +66,9 @@ clear()
 prefix = config['BOT_CFG']['prefix'] 
 token = config['BOT_CFG']['token'] 
 spamtext = config['BOT_CFG']['spamtext'] 
-ac_name = config['BOT_CFG']['ac_name'] 
-ac_type = config['BOT_CFG']['ac_type'] 
-silent_mode = config['BOT_CFG']['silent_mode'] 
+ac_name = config['BOT_CFG']['ac_name']
+ac_type = int(config['BOT_CFG']['ac_type']) 
+silent_mode = int(config['BOT_CFG']['silent_mode'] )
 chnrln = config['BOT_CFG']['channels and roles name']
 wbn = config['BOT_CFG']['webhooks name']
 srvn = config['BOT_CFG']['server name']
