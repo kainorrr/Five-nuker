@@ -1,7 +1,7 @@
 # Discord Five nuker bot | Download here https://github.com/glitch65/Discord-Five-nuker-bot/releases
 
 # v2.0B fixed activity changer and silent mode
-# v2.0 add UI, token check andimproved the ban system a little more, it should be faster now
+# v2.0 add UI, token check and improved the ban system a little more, it should be faster now
 # v2.0pre2 added icon check
 # v2.0pre added configuration system and now nuker can be downloaded as a standalone program 
 # v1.3 Improved spam in spam channels + no more global rate
