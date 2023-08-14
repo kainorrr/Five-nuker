@@ -1,5 +1,6 @@
 # Discord Five nuker bot | Download here https://github.com/glitch65/Discord-Five-nuker-bot/releases
 
+# V2.1 now you can change how many channels will be created, pings in these channels, and how many roles there will be
 # v2.0B fixed activity changer and silent mode
 # v2.0 add UI, token check and improved the ban system a little more, it should be faster now
 # v2.0pre2 added icon check
