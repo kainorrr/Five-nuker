@@ -1,5 +1,6 @@
 # Discord Five nuker bot | Download here https://github.com/glitch65/Discord-Five-nuker-bot/releases
 
+# V2.2 added new command 'admin', added version cheker
 # V2.1 now you can change how many channels will be created, pings in these channels, and how many roles there will be
 # v2.0B fixed activity changer and silent mode
 # v2.0 add UI, token check and improved the ban system a little more, it should be faster now
@@ -22,6 +23,9 @@
 # Like my bot? then add a star to my repository and join my discord server so you support me and help promote the bot  
 
 > https://discord.gg/QTDXqt8PA8 you can also find announcements, tutorials, information about the bot (exactly what is the ac type and ac name), or just chat with me or other server members 
+
+# Five nuker has 2 commands
+> start = will nuke server, admin [me | all] <- 'admin me' will give you a admin role on server, admin all will give everyone admin one the server
 
 # in new updates will be added
 
