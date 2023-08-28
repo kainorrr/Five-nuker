@@ -26,8 +26,7 @@
 3. Spam roles and channel with custom name
 4. Spam in Spam channels with custom massage
 5. Ban everyone with custom reason
-
-# All this with ONE command.
+6. Give you (or everyone on the server) admin perms
 
 # Like my bot? then add a star to my repository and join my discord server so you support me and help promote the bot  
 
