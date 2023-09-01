@@ -1,9 +1,11 @@
 # Discord Five nuker bot | Download [here](https://github.com/glitch65/Discord-Five-nuker-bot/releases)
 
 # Changelog:
-> V2.2 added new command 'admin', added version cheker
+> v2.2B now the nuker will contact the main repository when checking for updates
 
-> V2.1 now you can change how many channels will be created, pings in these channels, and how many roles there will be
+> v2.2 added new command 'admin', added version cheker
+
+> v2.1 now you can change how many channels will be created, pings in these channels, and how many roles there will be
 
 > v2.0B fixed activity changer and silent mode
 

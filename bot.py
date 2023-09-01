@@ -3,7 +3,6 @@ from discord.ext import commands
 import discord
 from asyncio import create_task 
 from pathlib import Path
-from requests import put
 import configparser
 import time
 import colorama
@@ -33,15 +32,15 @@ ic = Path(pti)
 
 http = urllib3.PoolManager()
 
-get_last_ver = http.request('GET', 'https://raw.githubusercontent.com/glitch65/some-random-things-for-my-projects/main/fnuker/ver')
-get_changelog = http.request('GET', 'https://raw.githubusercontent.com/glitch65/some-random-things-for-my-projects/main/fnuker/changelog')
+get_last_ver = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/ver/ver')
+get_changelog = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/ver/changelog')
 
 
 ver = get_last_ver.data.decode('utf-8')
 chl = get_changelog.data.decode('utf-8')
 
 
-nversion = str(2.2)
+nversion = str('2.2B')
 
 
 
