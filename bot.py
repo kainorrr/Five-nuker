@@ -9,6 +9,7 @@ import colorama
 from colorama import Fore
 import os
 import urllib3
+import fade
 
 config = configparser.ConfigParser()
 
@@ -40,7 +41,7 @@ ver = get_last_ver.data.decode('utf-8')
 chl = get_changelog.data.decode('utf-8')
 
 
-nversion = str('2.2B')
+nversion = str('2.3')
 
 
 
@@ -127,8 +128,7 @@ client = commands.Bot(command_prefix=prefix, help_command=None, intents=intents.
 
 
 
-
-
+bot_started_text = f'{Fore.MAGENTA}Bot launched successfully!'
 
 
 def login():
@@ -140,8 +140,9 @@ def login():
 async def rmm():
     clear()
     mm()
-    print(f'{Fore.CYAN}[BOT]' + '\033[39m' + 'Started')
-    print(f'{Fore.GREEN}Logged in as {client.user}!')
+    print(bot_started_text.center(115))
+    print(f'{Fore.MAGENTA}Logged in as {Fore.GREEN}{client.user}!'.center(120))
+    
 
 @client.event
 async def on_ready():
@@ -213,30 +214,43 @@ async def bananaa(ctx):
       except: pass
  
 
+raw_nuker_logo = '''
+                     █████▒ ██▓ ██▒   █▓▓█████     ███▄    █  █    ██  ██ ▄█▀▓█████  ██▀███  
+                   ▓██   ▒ ▓██▒▓██░   █▒▓█   ▀     ██ ▀█   █  ██  ▓██▒ ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒
+                   ▒████ ░ ▒██▒ ▓██  █▒░▒███      ▓██  ▀█ ██▒▓██  ▒██░▓███▄░ ▒███   ▓██ ░▄█ ▒
+                   ░▓█▒  ░ ░██░  ▒██ █░░▒▓█  ▄    ▓██▒  ▐▌██▒▓▓█  ░██░▓██ █▄ ▒▓█  ▄ ▒██▀▀█▄  
+                   ░▒█░    ░██░   ▒▀█░  ░▒████▒   ▒██░   ▓██░▒▒█████▓ ▒██▒ █▄░▒████▒░██▓ ▒██▒
+                    ▒ ░    ░▓     ░ ▐░  ░░ ▒░ ░   ░ ▒░   ▒ ▒ ░▒▓▒ ▒ ▒ ▒ ▒▒ ▓▒░░ ▒░ ░░ ▒▓ ░▒▓░
+                    ░       ▒ ░   ░ ░░   ░ ░  ░   ░ ░░   ░ ▒░░░▒░ ░ ░ ░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░
+                    ░ ░     ▒ ░     ░░     ░         ░   ░ ░  ░░░ ░ ░ ░ ░░ ░    ░     ░░   ░ 
+                            ░        ░     ░  ░            ░    ░     ░  ░      ░  ░   ░     
+                            ░                                                        
+
+
+
+'''
+
+info_about_nuker = f'{Fore.MAGENTA}Curent version: ' + f'{Fore.LIGHTGREEN_EX}v' + nversion + f'{Fore.MAGENTA}' + '     Prefix: ' + prefix
+
+empty_space = '''
+
+
+
+
+'''
+
 def mm():
-    print(f'{Fore.MAGENTA}' + '''
+    nuker_logo = fade.purplepink(raw_nuker_logo)
+    print(nuker_logo)
+    print(info_about_nuker.center(125))
+    print(empty_space)
 
-  █████▒ ██▓ ██▒   █▓▓█████     ███▄    █  █    ██  ██ ▄█▀▓█████  ██▀███  
-▓██   ▒ ▓██▒▓██░   █▒▓█   ▀     ██ ▀█   █  ██  ▓██▒ ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒
-▒████ ░ ▒██▒ ▓██  █▒░▒███      ▓██  ▀█ ██▒▓██  ▒██░▓███▄░ ▒███   ▓██ ░▄█ ▒
-░▓█▒  ░ ░██░  ▒██ █░░▒▓█  ▄    ▓██▒  ▐▌██▒▓▓█  ░██░▓██ █▄ ▒▓█  ▄ ▒██▀▀█▄  
-░▒█░    ░██░   ▒▀█░  ░▒████▒   ▒██░   ▓██░▒▒█████▓ ▒██▒ █▄░▒████▒░██▓ ▒██▒
- ▒ ░    ░▓     ░ ▐░  ░░ ▒░ ░   ░ ▒░   ▒ ▒ ░▒▓▒ ▒ ▒ ▒ ▒▒ ▓▒░░ ▒░ ░░ ▒▓ ░▒▓░
- ░       ▒ ░   ░ ░░   ░ ░  ░   ░ ░░   ░ ▒░░░▒░ ░ ░ ░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░
- ░ ░     ▒ ░     ░░     ░         ░   ░ ░  ░░░ ░ ░ ░ ░░ ░    ░     ░░   ░ 
-         ░        ░     ░  ░            ░    ░     ░  ░      ░  ░   ░     
-                 ░                                                        
-
-
-          
-''')
 
 mm()
 
+welcome_text = f'{Fore.MAGENTA}Welcome to Five Nuker press enter to start nuker...'
 
-
-
-input('Welcome to Five Nuker press enter to start nuker...')
+input(welcome_text.center(120) + f'{Fore.RESET}')
 login()
 
 

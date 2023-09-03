@@ -1,6 +1,8 @@
 # Discord Five nuker bot | Download [here](https://github.com/glitch65/Discord-Five-nuker-bot/releases)
 
 # Changelog:
+> v2.3 redesigned user interface now it looks better
+
 > v2.2B now the nuker will contact the main repository when checking for updates
 
 > v2.2 added new command 'admin', added version cheker
