@@ -22,7 +22,7 @@ def clear():
         os.system('clear')
 
 
-
+os.system("title Five Nuker - v2.3.1 - Made By G1itch")
 
 ptfc = 'cfg.ini'
 pti = 'icon.PNG'
@@ -41,7 +41,7 @@ ver = get_last_ver.data.decode('utf-8')
 chl = get_changelog.data.decode('utf-8')
 
 
-nversion = str('2.3')
+nversion = str('2.3.1')
 
 
 
