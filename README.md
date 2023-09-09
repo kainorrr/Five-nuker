@@ -39,7 +39,7 @@
 > https://discord.gg/QTDXqt8PA8 you can also find announcements, tutorials, information about the bot (exactly what is the ac type and ac name), or just chat with me or other server members 
 
 # How 2 use this bot?
-> Tutorial can be founded [here.](https://github.com/glitch65/some-random-things-for-my-projects/blob/main/fnuker/h2u.md#how-2-use-five-nuker)
+> Tutorial can be founded [here.](https://github.com/glitch65/Discord-Five-nuker-bot/blob/random-stuff/h2u.md)
 
 # Five nuker has 2 commands
 > start = will nuke server, admin [me | all] <- 'admin me' will give you a admin role on server, admin all will give everyone admin one the server
