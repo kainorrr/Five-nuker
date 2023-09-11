@@ -4,11 +4,9 @@ import discord
 from asyncio import create_task 
 from pathlib import Path
 import configparser
-import time
 import colorama
 from colorama import Fore
 import os
-import urllib3
 import fade
 
 config = configparser.ConfigParser()
@@ -21,59 +19,26 @@ def clear():
     else:
         os.system('clear')
 
+os.system('taskkill /f /im launcher.exe')
+clear()
+os.system("title Five Nuker - v3.0 - Made By G1itch")
 
-os.system("title Five Nuker - v2.3.1 - Made By G1itch")
-
-ptfc = 'cfg.ini'
-pti = 'icon.PNG'
+ptfc = 'Bin\\cfg.ini'
+pti = 'Bin\\icon.PNG'
 cfg = Path(ptfc)
 ic = Path(pti)
 
-
-
-http = urllib3.PoolManager()
-
-get_last_ver = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/ver/ver')
-get_changelog = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/ver/changelog')
-
-
-ver = get_last_ver.data.decode('utf-8')
-chl = get_changelog.data.decode('utf-8')
-
-
-nversion = str('2.3.1')
-
-
-
-
-if nversion == ver:
-    print(f'{Fore.GREEN}[Update checker]' + '\033[39m' + 'Your version does not need to be updated!')
-else:
-    print(f'{Fore.GREEN}[Update checker]' + '\033[39m' + 'New version of nuker ' + ver + ' is available!')
-    print(f'{Fore.GREEN}Changelog:')
-    print(f'{Fore.GREEN}' + chl)
-    print(f'{Fore.GREEN}Nuker will close automatically after 5 seconds!')
-    time.sleep(5)
-    quit()
-
-
-
-
-
-
-if ic.is_file():
-    f = open('icon.PNG', 'rb')
+with open('Bin\\icon.PNG', 'rb') as f:
     icona = f.read()
-else:
-    print(f'{Fore.RED}[ERROR]' + '\033[39m' + 'Icon not founded')
-    time.sleep(1)
-    print(f'{Fore.YELLOW}[Icon Check System]' + '\033[39m' + 'Please add icon to bot folder and rename it to icon.PNG')
-    input(f'{Fore.YELLOW}[Icon Check System]' + '\033[39m' + 'Press Enter to close program...')
-    quit()
+
+nversion = open('Bin\\curent_version.fnv', 'rb')
+
+nversion = nversion.read().decode('utf-8')
+
 
 if cfg.is_file():
     print(f'{Fore.YELLOW}[Config System]' + '\033[39m' + ' Config founded!')
-    config.read('cfg.ini')
+    config.read('Bin\\cfg.ini')
     print(f'{Fore.CYAN}[BOT]' + '\033[39m' + 'Starting...')
 else:
     print(f'{Fore.RED}[ERROR]' + '\033[39m' + 'Config not found! Creating new config...')
@@ -92,7 +57,7 @@ else:
                          'how much roles do you want?': '40',
                          'admin role name': 'sh...'}
     
-    with open('cfg.ini', 'w') as cfg_file:
+    with open('Bin\\cfg.ini', 'w') as cfg_file:
             config.write(cfg_file)
     print(f'{Fore.YELLOW}[Config System]' + '\033[39m' + 'Done!')
     print(f'{Fore.YELLOW}[Config System]' + '\033[39m' + 'Edit config file in youre folder and try again')
