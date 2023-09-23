@@ -21,7 +21,9 @@ def clear():
 
 os.system('taskkill /f /im launcher.exe')
 clear()
-os.system("title Five Nuker - v3.0 - Made By G1itch")
+nversion = open('Bin\\curent_version.fnv', 'rb')
+nversion = nversion.read().decode('utf-8')
+os.system("title Five Nuker - v" + nversion + " - Made By G1itch")
 
 ptfc = 'Bin\\cfg.ini'
 pti = 'Bin\\icon.PNG'
@@ -30,10 +32,6 @@ ic = Path(pti)
 
 with open('Bin\\icon.PNG', 'rb') as f:
     icona = f.read()
-
-nversion = open('Bin\\curent_version.fnv', 'rb')
-
-nversion = nversion.read().decode('utf-8')
 
 
 if cfg.is_file():
