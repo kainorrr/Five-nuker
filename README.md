@@ -1,5 +1,8 @@
 # Discord Five nuker bot | Download [here](https://github.com/glitch65/Discord-Five-nuker-bot/raw/launcher/launcher.exe)
 
+
+# Nuker is broken dont download it yet
+
 # Changelog:
 > v3.1 added new nuker mode
 
