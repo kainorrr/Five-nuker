@@ -1,6 +1,8 @@
 # Discord Five nuker bot | Download [here](https://github.com/glitch65/Discord-Five-nuker-bot/raw/launcher/launcher.exe)
 
 # Changelog:
+> v3.1 added new nuker mode
+
 > v3.0 added launcher for .exe version of nuker
 
 > v2.3.1 added custom window title and nuker icon (only for .exe version of nuker)
@@ -45,6 +47,10 @@
 
 # Five nuker has 2 commands
 > start = will nuke server, admin [me | all] <- 'admin me' will give you a admin role on server, admin all will give everyone admin one the server
+
+# Five nuker has 2 modes
+> mode 1 -> is nuke on command it will nuke when you use command start
+> mode 2 -> will nuke sever when it joins it
 
 # in new updates will be added
 

