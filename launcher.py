@@ -60,11 +60,14 @@ http = urllib3.PoolManager()
 get_launcher_last_ver = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/launcher/launcher_last_ver')
 get_last_ver = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/launcher/curent_version.fnv')
 get_changelog = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/ver/changelog')
+is_update_has_cfgsys_changes = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/launcher/is_update_has_cfgsys_changes')
 get_last_ver = get_last_ver.data.decode('utf-8')
 get_launcher_last_ver = get_launcher_last_ver.data.decode('utf-8')
 get_changelog = get_changelog.data.decode('utf-8')
+is_update_has_cfgsys_changes = is_update_has_cfgsys_changes.data.decode('utf-8')
 
-curent_launcher_ver = str('1.0')
+
+curent_launcher_ver = str('1.1')
 print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Checking for updates...')
 if not get_launcher_last_ver == curent_launcher_ver:
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} New version detected!')
@@ -133,6 +136,12 @@ def update_nuker():
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} restoring user files...')
     restore_user_files()
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Done!')
+    if is_update_has_cfgsys_changes == 'yes':
+        print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} New version of Five nuker contaians config system changes')
+        print(f'{Fore.RED}[WARNING]{Fore.RESET} Your config will be deleted')
+        input('Press Enter to delete config')
+        os.remove('Bin\\cfg.ini')
+        print('Config was succesfully deleted!')        
     launch_nuker()
 
 
