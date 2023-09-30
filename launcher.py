@@ -17,7 +17,7 @@ def clear():
 
 def clear_installator():
     try:
-        la = Path('installer')
+        la = Path('installer.exe')
         if la.is_file:
             os.system('taskkill /f /im installer.exe')
             clear()
@@ -68,10 +68,9 @@ get_last_ver = get_last_ver.data.decode('utf-8')
 get_launcher_last_ver = get_launcher_last_ver.data.decode('utf-8')
 get_changelog = get_changelog.data.decode('utf-8')
 is_update_has_cfgsys_changes = is_update_has_cfgsys_changes.data.decode('utf-8')
-curent_version = open('Bin\curent_version.fnv', 'r')
-curent_version = curent_version.read()
 
-curent_launcher_ver = str('1.2')
+
+curent_launcher_ver = str('2')
 print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Checking for updates...')
 if not get_launcher_last_ver == curent_launcher_ver:
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} New launcher version detected!')
@@ -82,7 +81,7 @@ else:
 
 
 def install_nuker():
-    print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Installing...')
+    print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Installing nuker...')
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Downloading fn.exe...')
     urllib.request.urlretrieve("https://github.com/glitch65/Discord-Five-nuker-bot/raw/launcher/five%20nuker.exe", "fn.exe")
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Downloading curent_version.fnv...')
@@ -97,6 +96,18 @@ def launch_nuker():
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Staring nuker...')
     os.system('Bin\\fn.exe')
 
+def check_curent_n_install():
+    try:
+        curent_version = open('Bin\curent_version.fnv', 'r')
+        curent_version = curent_version.read()
+    except:
+        install_nuker()
+        launch_nuker()
+
+check_curent_n_install()
+curent_version = open('Bin\curent_version.fnv', 'r')
+curent_version = curent_version.read()
+
 def n_check():
     try:
         if curent_version == get_last_ver:
@@ -105,8 +116,7 @@ def n_check():
         else:
             show_nupdate_massage()
     except:
-        install_nuker()
-        launch_nuker()
+        print('An error occurred while checking for updates, to solve it, please notify me (the creator) in my discord server or create a issue in Github repository')
 
 def show_nupdate_massage():
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} New nuker {curent_version} -> {get_last_ver} version avaible!')
