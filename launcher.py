@@ -5,6 +5,7 @@ from pathlib import Path
 import urllib3
 from colorama import Fore
 import colorama
+from time import sleep
 os.system("title Five Nuker - Launcher")
 colorama.init(autoreset=True)
 
@@ -16,9 +17,11 @@ def clear():
 
 def clear_installator():
     try:
-        os.system('taskkill /f /im installer.exe')
-        clear()
-        os.remove('installer.exe')
+        la = Path('installer')
+        if la.is_file:
+            os.system('taskkill /f /im installer.exe')
+            clear()
+            os.remove('installer.exe')
     except: pass
 
 
@@ -59,18 +62,19 @@ http = urllib3.PoolManager()
 
 get_launcher_last_ver = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/launcher/launcher_last_ver')
 get_last_ver = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/launcher/curent_version.fnv')
-get_changelog = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/ver/changelog')
+get_changelog = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/launcher/nuker_changelog')
 is_update_has_cfgsys_changes = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/launcher/is_update_has_cfgsys_changes')
 get_last_ver = get_last_ver.data.decode('utf-8')
 get_launcher_last_ver = get_launcher_last_ver.data.decode('utf-8')
 get_changelog = get_changelog.data.decode('utf-8')
 is_update_has_cfgsys_changes = is_update_has_cfgsys_changes.data.decode('utf-8')
+curent_version = open('Bin\curent_version.fnv', 'r')
+curent_version = curent_version.read()
 
-
-curent_launcher_ver = str('1.1')
+curent_launcher_ver = str('1.2')
 print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Checking for updates...')
 if not get_launcher_last_ver == curent_launcher_ver:
-    print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} New version detected!')
+    print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} New launcher version detected!')
     urllib.request.urlretrieve("https://github.com/glitch65/Discord-Five-nuker-bot/raw/launcher/installer.exe", "installer.exe")
     os.system('installer.exe')
 else:
@@ -90,21 +94,35 @@ def install_nuker():
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Installed!')
 
 def launch_nuker():
+    print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Staring nuker...')
     os.system('Bin\\fn.exe')
 
 def n_check():
     try:
-        curent_version = open('Bin\curent_version.fnv', 'r')
-        curent_version = curent_version.read()
         if curent_version == get_last_ver:
             print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Nuker does not require updating!')
             launch_nuker()
         else:
-            update_nuker()
+            show_nupdate_massage()
     except:
         install_nuker()
         launch_nuker()
 
+def show_nupdate_massage():
+    print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} New nuker {curent_version} -> {get_last_ver} version avaible!')
+    print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Changelog:')
+    print(get_changelog)
+    print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} 1 - Install update | 2 - Ignore update and start nuker')
+    user_choice = input(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Select >>> ')
+    if user_choice == '1':
+        update_nuker()
+    elif user_choice == '2':
+        launch_nuker()
+    else:
+        print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Please enter number 1 or 2!')
+        sleep(2)
+        clear()
+        show_nupdate_massage()
 
 
 def backup_user_files():

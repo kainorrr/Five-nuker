@@ -2,13 +2,8 @@ import urllib.request
 import os
 
 
-print('updating installer...')
 
-
-os.system('title installer')
-
-
-
+os.system('title updating launcher...')
 
 
 def remove_old_launcher():
@@ -20,6 +15,7 @@ def remove_old_launcher():
 
 remove_old_launcher()
 
+print('updating launcher...')
 urllib.request.urlretrieve("https://github.com/glitch65/Discord-Five-nuker-bot/raw/launcher/launcher.exe", "launcher.exe")
 
 os.system('launcher.exe')
