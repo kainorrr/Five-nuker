@@ -28,7 +28,6 @@ def clear_installator():
 clear_installator()
 
 
-
 def remade_bin_folder():
     try:
         os.mkdir('Bin')
@@ -70,7 +69,7 @@ get_changelog = get_changelog.data.decode('utf-8')
 is_update_has_cfgsys_changes = is_update_has_cfgsys_changes.data.decode('utf-8')
 
 
-curent_launcher_ver = str('2')
+curent_launcher_ver = str('3')
 print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Checking for updates...')
 if not get_launcher_last_ver == curent_launcher_ver:
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} New launcher version detected!')
@@ -90,6 +89,7 @@ def install_nuker():
     urllib.request.urlretrieve("https://raw.githubusercontent.com/glitch65/Discord-Five-nuker-bot/main/icon.PNG", "icon.PNG")
     remade_bin_folder()
     move_stuff('yes')
+    os.mkdir('Configs')
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Installed!')
 
 def launch_nuker():
@@ -108,6 +108,9 @@ check_curent_n_install()
 curent_version = open('Bin\curent_version.fnv', 'r')
 curent_version = curent_version.read()
 
+if not os.path.exists('Configs'):
+    os.mkdir('Configs')
+
 def n_check():
     try:
         if curent_version == get_last_ver:
@@ -117,6 +120,8 @@ def n_check():
             show_nupdate_massage()
     except:
         print('An error occurred while checking for updates, to solve it, please notify me (the creator) in my discord server or create a issue in Github repository')
+        input('Press Enter to close nuker...')
+        quit()
 
 def show_nupdate_massage():
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} New nuker {curent_version} -> {get_last_ver} version avaible!')
@@ -136,18 +141,14 @@ def show_nupdate_massage():
 
 
 def backup_user_files():
-    config = str(Path('Bin\cfg.ini'))
     icon = str(Path('Bin\icon.PNG'))
     work_folder = str(os.getcwd())
-    shutil.move(config, work_folder)
     shutil.move(icon, work_folder)
 
 def restore_user_files():
-    config = str(Path('cfg.ini'))
     icon = str(Path('icon.PNG'))
     work_folder = str(os.getcwd())
     bin_folder = work_folder + '\\Bin'
-    shutil.move(config, bin_folder)
     shutil.move(icon, bin_folder)
 
 def update_nuker():

