@@ -69,7 +69,7 @@ get_changelog = get_changelog.data.decode('utf-8')
 is_update_has_cfgsys_changes = is_update_has_cfgsys_changes.data.decode('utf-8')
 
 
-curent_launcher_ver = str('3')
+curent_launcher_ver = str('4')
 print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} Checking for updates...')
 if not get_launcher_last_ver == curent_launcher_ver:
     print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} New launcher version detected!')
@@ -169,7 +169,7 @@ def update_nuker():
         print(f'{Fore.YELLOW}[Launcher]{Fore.RESET} New version of Five nuker contaians config system changes')
         print(f'{Fore.RED}[WARNING]{Fore.RESET} Your config will be deleted')
         input('Press Enter to delete config')
-        os.remove('Bin\\cfg.ini')
+        os.remove('Configs\\main_cfg.ini')
         print('Config was succesfully deleted!')        
     launch_nuker()
 
