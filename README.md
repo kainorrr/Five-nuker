@@ -42,6 +42,7 @@
 4. Spam in Spam channels with custom massage
 5. Ban everyone with custom reason
 6. Give you (or everyone on the server) admin perms
+7. Create fake commands 
 
 
 
