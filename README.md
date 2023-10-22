@@ -45,12 +45,16 @@
 5. Ban everyone with custom reason
 6. Give you (or everyone on the server) admin perms
 7. Create fake commands 
+8. automatically nuke the server when adding a bot
 
+# Also...
+1. this bot is fully customizable 
+2. you can add your friends to the white list so that the bot does not ban them
 
 
 # Like my bot? then add a star to my repository and join my discord server so you support me and help promote the bot  
 
-> https://discord.gg/QTDXqt8PA8 you can also find announcements, tutorials, information about the bot (exactly what is the ac type and ac name), or just chat with me or other server members 
+> https://discord.gg/QTDXqt8PA8 you can also find announcements, tutorials, information about the bot (how to configure some functions or ask for help), or just chat with me or other server members 
 
 # How 2 use this bot?
 > Tutorial can be founded [here.](https://github.com/glitch65/Discord-Five-nuker-bot/blob/random-stuff/h2u.md)
