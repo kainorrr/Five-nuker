@@ -35,21 +35,16 @@ cr = Path('Configs\\nuker_reactions_to_fake_commands.txt')
 
 ptwlp = Path('Configs\\whitelisted_people.txt')
 
-if ptwlp.is_file():
-    with open(ptwlp) as list_of_wlp:
-        whitelisted_ppls = list_of_wlp.read().splitlines()
-else:
-    with open(ptwlp, 'w+') as list_of_wlp:
-        whitelisted_ppls = list_of_wlp.write('user1#1234\nuser2#4321\ng11itch#0')
-        whitelisted_ppls = whitelisted_ppls.close()
-        whitelisted_ppls = whitelisted_ppls.read().splitlines()
+if not ptwlp.is_file():
+    with open(ptwlp, 'w+') as tmpf:
+        tmpf.write('user1#1234\nuser2#4321\ng11itch#0')
+        tmpf.close()
+
+ 
 
 
-    
-
-
-
-
+with open(ptwlp, 'r') as list_of_wlp:
+    whitelisted_ppls = list_of_wlp.read().splitlines()
 
 
 if not cl.is_file():
@@ -267,7 +262,8 @@ async def bananaa(ctx):
             pass
 
 
- 
+
+
 
 async def banallmode2(ctx):
     all_members_list = list(ctx.members)

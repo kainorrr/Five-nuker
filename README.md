@@ -4,6 +4,8 @@
 # how to use the fake command system is written in my discord server
 
 # Changelog:
+> v3.3p1 fixed nuker
+
 > v3.3 added white list system
 
 > v3.2 added a system of fake commands, now you can disable the ban of all server members when nuke
