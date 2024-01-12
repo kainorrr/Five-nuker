@@ -1,5 +1,7 @@
 # Discord Five nuker bot | Download [here](https://github.com/glitch65/Discord-Five-nuker-bot/raw/launcher/launcher.exe)
 
+# 30 🌟 and I continue to develop the nuker
+
 # if you have any problems with the bot, write to me on the discord server or create an issue
 # how to use the fake command system is written in my discord server
 
