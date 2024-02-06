@@ -3,7 +3,7 @@
 1. Download Five Nuker
    > You can download nuker as .py file or as a regular program.
 2. Open program (or script) and wait while it creates the config.
-2.1 after update 3.0 the config is located in the Bin folder 
+2.1 The config file is located in the configs folder. 
 3. Create a new bot [here.](https://discord.com/developers/applications)
 ![](https://cdn.discordapp.com/attachments/1073902493156769794/1143876497531207720/image.png)
 ![](https://cdn.discordapp.com/attachments/1073902493156769794/1143877684074655744/image.png)
