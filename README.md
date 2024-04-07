@@ -3,7 +3,7 @@
 # ⚠ Rework status ⚠
 > Five nuker rework is in development! Follow my [discord server](https://discord.com/invite/QTDXqt8PA8) for spoilers for the update and release date
 
-> ![](https://media.discordapp.net/attachments/1208005256156553216/1215652983627587645/image.png?ex=65fd8811&is=65eb1311&hm=2fb9141b0817e02b385b768f099a06050a94f2149d5b10a8caa414b5c7831c85&=&format=webp)
+> ![](https://raw.githubusercontent.com/glitch65/Five-nuker/ver/image.png)
 
 # ❓ Have any questions or problems? Contact us to discord server or create an issue
 > Our Discord: https://discord.gg/QTDXqt8PA8
