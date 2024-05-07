@@ -1,5 +1,5 @@
 > [!IMPORTANT]
-> The project is closed. All information on the discord server
+> This project has been abandoned. Reborn will be released soon™.
 
 # Discord Five nuker bot | Download [here](https://github.com/glitch65/Discord-Five-nuker-bot/raw/launcher/launcher.exe) (OLD VERSION V3.3)
 
