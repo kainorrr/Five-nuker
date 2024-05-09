@@ -3,6 +3,7 @@
 [+] New ui
 [+] Now if there is an error when running nuker, nuker will inform you about it, and it will be easier for you and us to deal with it.
 [+] This system also applies to the config system.
+[+] Now you can make it so that only whitelisted users can execute nuker commands.
 [/] Many features of the old nuker and new features of the new nuker have not been added, but they will be added in the future.
 
 Re-download the nuker from the official repository: https://github.com/glitch65/Five-nuker/
