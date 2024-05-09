@@ -1,7 +1,9 @@
-Patch 1 >>> fixed nuker
+[+] ALL code rewritten
+[+] New config system
+[+] New ui
+[+] Now if there is an error when running nuker, nuker will inform you about it, and it will be easier for you and us to deal with it.
+[+] This system also applies to the config system.
+[/] Many features of the old nuker and new features of the new nuker have not been added, but they will be added in the future.
 
-[+] added a white list system
+Re-download the nuker from the official repository: https://github.com/glitch65/Five-nuker/
 
-[?] now you can whitelist your friends and while bot nuke server it will not ban your friends
-[?] how to use the whitelist system is written in my discord server
-[?] now, when you activate a nuke through a command, you will not be banned, regardless of whether you are on the white list or not
