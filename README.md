@@ -1,12 +1,4 @@
-> [!IMPORTANT]
-> This project has been abandoned. Reborn will be released soon™.
-
-# Discord Five nuker bot | Download [here](https://github.com/glitch65/Discord-Five-nuker-bot/raw/launcher/launcher.exe) (OLD VERSION V3.3)
-
-# ⚠ Rework status ⚠
-> Five nuker rework is in development! Follow my [discord server](https://discord.com/invite/QTDXqt8PA8) for spoilers for the update and release date
-
-> ![](https://raw.githubusercontent.com/glitch65/Five-nuker/ver/image.png)
+# Five nuker | Download [here](https://github.com/glitch65/Five-nuker/raw/Rework/release.zip)
 
 # ❓ Have any questions or problems? Contact us to discord server or create an issue
 > Our Discord: https://discord.gg/QTDXqt8PA8
@@ -18,9 +10,12 @@
 3. Spam roles and channel with custom name
 4. Spam in Spam channels with custom message
 5. Ban everyone with custom reason
-6. Give you (or everyone on the server) admin perms
-7. Create fake commands 
-8. Automatically nuke the server when adding a bot
+6. Give you (or everyone on the server) admin perms -> Not available in the reborn version yet
+7. Create fake commands -> Not available in the reborn version yet
+8. Automatically nuke the server when adding a bot -> Not available in the reborn version yet
+
+> [!NOTE]
+> Do you want to use the legacy version? You can download it [here](https://github.com/glitch65/Discord-Five-nuker-bot/raw/launcher/launcher.exe) (it will ask for updates, but you just ignore it and that's it).
 
 # Also:
 1. This bot is fully customizable 
@@ -30,5 +25,3 @@
 > You can also find announcements, tutorials, information about the bot (how to configure some functions or ask for help), or just chat with me or other server members
 > https://discord.gg/QTDXqt8PA8 
 
-# ❔ How to use this bot?
-> Tutorial can be founded [here.](https://github.com/glitch65/Discord-Five-nuker-bot/blob/random-stuff/h2u.md)
