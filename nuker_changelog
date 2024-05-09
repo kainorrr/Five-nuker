@@ -1,7 +1,0 @@
-Patch 1 >>> fixed nuker
-
-[+] added a white list system
-
-[?] now you can whitelist your friends and while bot nuke server it will not ban your friends
-[?] how to use the whitelist system is written in my discord server
-[?] now, when you activate a nuke through a command, you will not be banned, regardless of whether you are on the white list or not
