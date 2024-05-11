@@ -10,6 +10,9 @@ from time import sleep
 import logging
 import webbrowser
 import urllib3
+import zipfile
+import urllib.request
+import shutil
 
 logging.getLogger("discord.http").disabled = True
 logging.getLogger("discord.client").disabled = True
@@ -17,10 +20,37 @@ logging.getLogger("discord.gateway").disabled = True
 os.system("title Five-Nuker")
 
 def stop_nuker():
-    os.system("pause")
+    if os.name == "nt":
+        os.system("pause")
     quit()
 
-local_version = str("0.1")
+def clear():
+    if os.name=='nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+
+
+def start_update():
+    Center("Running the nuker update...")
+
+    urllib.request.urlretrieve("https://github.com/glitch65/Five-nuker/raw/Rework/updater.zip", "updater.zip")
+    
+    with zipfile.ZipFile("updater.zip", "r") as updater:
+        updater.extractall()
+    
+    os.system("updater.exe")
+
+if os.path.exists("updated"):
+    os.system('taskkill /f /im updater.exe')
+    sleep(2)
+    os.remove("updater.exe")
+    shutil.rmtree("_updater-stuff")
+    os.remove("updated")
+    clear()
+
+
+local_version = str("0.1.1")
 
 http = urllib3.PoolManager()
 
@@ -31,9 +61,12 @@ get_last_ver = get_last_ver.data.decode('utf-8')
 if not local_version == get_last_ver:
     Center("New version of Five-nuker avaible!")
     Center(f"{local_version} -> {get_last_ver}")
-    Center("Opening a page with a page loading and with a changelog after a few seconds...")
-    sleep(3)
-    webbrowser.open("https://github.com/glitch65/Five-nuker/releases")
+    if os.name == "nt":
+        start_update()
+    else:
+        Center("Opening a page with download and with a changelog after a few seconds...")
+        sleep(3)
+        webbrowser.open("https://github.com/glitch65/Five-nuker/releases")
 
 
 
@@ -115,11 +148,6 @@ with open('icon.png', 'rb') as f:
     icon = f.read()
 
 
-def clear():
-    if os.name=='nt':
-        os.system('cls')
-    else:
-        os.system('clear')
 
 bot = commands.Bot(config['prefix'],intents=discord.Intents.all(),help_command=None)
 
