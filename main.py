@@ -49,7 +49,7 @@ if os.path.exists("updated"):
     clear()
 
 if __name__ == '__main__':
-    local_version = str("0.2")
+    local_version = str("0.2p1")
 
     http = urllib3.PoolManager()
 
@@ -168,7 +168,7 @@ def check_cfg():
         keyboard.wait("space")
         clear()
     
-
+check_cfg()
 
 if __name__ == '__main__':
     CenterColor(raw_image,((125,0,255),(0,0,0)), len(raw_image.split("\n")),"V")                    
