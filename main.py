@@ -49,7 +49,7 @@ if os.path.exists("updated"):
     clear()
 
 if __name__ == '__main__':
-    local_version = str("0.2p1")
+    local_version = str("0.3")
 
     http = urllib3.PoolManager()
 
