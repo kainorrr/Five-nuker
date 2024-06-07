@@ -10,7 +10,7 @@
 3. Spam roles and channel with custom name
 4. Spam in Spam channels with custom message
 5. Ban everyone with custom reason
-6. Give you (or everyone on the server) admin perms -> Not available in the reborn version yet
+6. Give you (or everyone on the server) admin perms
 7. Create fake commands -> Not available in the reborn version yet
 8. Automatically nuke the server when adding a bot -> Not available in the reborn version yet
 

