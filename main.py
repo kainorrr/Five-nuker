@@ -18,6 +18,8 @@ import keyboard
 
 os.system("title Five-Nuker")
 
+drawer = Drawer()
+
 def stop_nuker():
     if os.name == "nt":
         os.system("pause")
@@ -31,7 +33,7 @@ def clear():
 
 
 def start_update():
-    Center("Running the nuker update...")
+    drawer.Center("Running the nuker update...")
 
     urllib.request.urlretrieve("https://github.com/glitch65/Five-nuker/raw/Rework/updater.zip", "updater.zip")
     
@@ -49,7 +51,7 @@ if os.path.exists("updated"):
     clear()
 
 if __name__ == '__main__':
-    local_version = str("0.3.1")
+    local_version = str("0.4")
 
     http = urllib3.PoolManager()
 
@@ -58,8 +60,8 @@ if __name__ == '__main__':
     get_last_ver = get_last_ver.data.decode('utf-8')
 
     if not local_version == get_last_ver:
-        Center("New version of Five-nuker avaible!")
-        Center(f"{local_version} -> {get_last_ver}")
+        drawer.Center("New version of Five-nuker avaible!")
+        drawer.Center(f"{local_version} -> {get_last_ver}")
         if os.name == "nt":
             start_update()
         else:
@@ -71,20 +73,16 @@ if __name__ == '__main__':
 
 
 if __name__ == '__main__':
-    raw_image = """   
-     █████▒██▓ ██▒   █▓▓█████     ███▄    █  █    ██  ██ ▄█▀▓█████  ██▀███  
-    ▓██   ▒▓██▒▓██░   █▒▓█   ▀     ██ ▀█   █  ██  ▓██▒ ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒
-    ▒████ ░▒██▒ ▓██  █▒░▒███      ▓██  ▀█ ██▒▓██  ▒██░▓███▄░ ▒███   ▓██ ░▄█ ▒
-    ░▓█▒  ░░██░  ▒██ █░░▒▓█  ▄    ▓██▒  ▐▌██▒▓▓█  ░██░▓██ █▄ ▒▓█  ▄ ▒██▀▀█▄  
-    ░▒█░   ░██░   ▒▀█░  ░▒████▒   ▒██░   ▓██░▒▒█████▓ ▒██▒ █▄░▒████▒░██▓ ▒██▒
-    ▒ ░   ░▓     ░ ▐░  ░░ ▒░ ░   ░ ▒░   ▒ ▒ ░▒▓▒ ▒ ▒ ▒ ▒▒ ▓▒░░ ▒░ ░░ ▒▓ ░▒▓░
-    ░      ▒ ░   ░ ░░   ░ ░  ░   ░ ░░   ░ ▒░░░▒░ ░ ░ ░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░
-    ░ ░    ▒ ░     ░░     ░         ░   ░ ░  ░░░ ░ ░ ░ ░░ ░    ░     ░░   ░ 
-            ░        ░     ░  ░            ░    ░     ░  ░      ░  ░   ░     
-                    ░                                                        """
-    raw_image1 =f"""
-    \n\n\n{raw_image}\n\n\n"""
-
+    txt = """  █████▒██▓ ██▒   █▓▓█████  ███▄    █  █    ██  ██ ▄█▀▓█████  ██▀███  
+▓██   ▒▓██▒▓██░   █▒▓█   ▀  ██ ▀█   █  ██  ▓██▒ ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒
+▒████ ░▒██▒ ▓██  █▒░▒███   ▓██  ▀█ ██▒▓██  ▒██░▓███▄░ ▒███   ▓██ ░▄█ ▒
+░▓█▒  ░░██░  ▒██ █░░▒▓█  ▄ ▓██▒  ▐▌██▒▓▓█  ░██░▓██ █▄ ▒▓█  ▄ ▒██▀▀█▄  
+░▒█░   ░██░   ▒▀█░  ░▒████▒▒██░   ▓██░▒▒█████▓ ▒██▒ █▄░▒████▒░██▓ ▒██▒
+ ▒ ░   ░▓     ░ ▐░  ░░ ▒░ ░░ ▒░   ▒ ▒ ░▒▓▒ ▒ ▒ ▒ ▒▒ ▓▒░░ ▒░ ░░ ▒▓ ░▒▓░
+ ░      ▒ ░   ░ ░░   ░ ░  ░░ ░░   ░ ▒░░░▒░ ░ ░ ░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░
+ ░ ░    ▒ ░     ░░     ░      ░   ░ ░  ░░░ ░ ░ ░ ░░ ░    ░     ░░   ░ 
+        ░        ░     ░  ░         ░    ░     ░  ░      ░  ░   ░     
+                ░                                                     """
 
 
     
@@ -110,8 +108,9 @@ def_cfg = {
                 "Enable_activity": True,
                 "Activity_type": "playing",
                 "Activity_name": "Five Nuker on TOP!",
-                "Selected_theme": "default"
-            }
+                "Selected_theme": "default",
+                "Enable_plugins?": False
+                }
 
 def_theme = {
     "logo_pallete": ((125,0,255),(0,0,0)),
@@ -134,9 +133,16 @@ def_theme = {
 }
 
 
+def load_plugins():
+    for file in os.listdir("plugins"):
+        if file.endswith(".py"):
+            plugin = os.path.join("plugins", file)
+            with open(plugin, "r") as plugin:
+                plugin_stuff = plugin.read()
+                exec(plugin_stuff,globals())
 
-
-
+if not os.path.exists("plugins"):
+    os.mkdir("cfg")
 
 if not os.path.exists("cfg"):
             os.mkdir("cfg")
@@ -178,7 +184,8 @@ list_of_settings = ["token",
                             "invisible_mode",
                             "Activity_type",
                             "Activity_name",
-                            "Selected_theme"]
+                            "Selected_theme",
+                            "Enable_plugins?"]
 for setting in list_of_settings:
                 try:
                     i = config[setting]
@@ -190,10 +197,10 @@ for setting in list_of_settings:
                         error = True
 if error == True:            
             clear()
-            Center("When checking the config, some bugs were found and corrected")
-            Center("This usually happens if there are missing lines in your config. This can be caused by a nuker update.")
-            Center("It is recommended to check and change config")
-            Center("To continue press the space bar on your keyboard...")
+            drawer.Center("When checking the config, some bugs were found and corrected")
+            drawer.Center("This usually happens if there are missing lines in your config. This can be caused by a nuker update.")
+            drawer.Center("It is recommended to check and change config")
+            drawer.Center("To continue press the space bar on your keyboard...")
             keyboard.wait("space")
             clear()
         
@@ -218,7 +225,7 @@ except Exception as e:
     stop_nuker()        
 
 if __name__ == '__main__':
-    CenterColor(raw_image,theme["logo_pallete"], theme["logo_gradient_steps"],theme["logo_gradient_type"])
+    drawer.CenterColor(txt,theme["logo_pallete"], theme["logo_gradient_steps"],theme["logo_gradient_type"])
     print(f"{F.GREEN}Config file loaded!{F.RESET}")
     
     if config["Enable logging?"] == False:
@@ -238,8 +245,8 @@ if __name__ == '__main__':
     async def on_ready():
         clear()
         os.system(f"title Five Nuker - Online - {bot.user} - ")
-        CenterColor(raw_image,theme["logo_pallete"], theme["logo_gradient_steps"],theme["logo_gradient_type"])
-        CenterColor(f"You loggen by {bot.user}",theme["logged_in_pallete"], theme["logged_in_gradient_steps"],theme["logged_in_gradient_type"])
+        drawer.CenterColor(txt,theme["logo_pallete"], theme["logo_gradient_steps"],theme["logo_gradient_type"])
+        drawer.CenterColor(f"You loggen by {bot.user}",theme["logged_in_pallete"], theme["logged_in_gradient_steps"],theme["logged_in_gradient_type"])
         if config["Activity_type"] == "playing" and config["invisible_mode"] == False:
             await bot.change_presence(activity=discord.Game(name=config["Activity_name"]))
         elif config["Activity_type"] == "listening" and config["invisible_mode"] == False:
@@ -250,11 +257,11 @@ if __name__ == '__main__':
             await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=config["Activity_name"]))
         elif config["Activity_type"] == None and config["invisible_mode"] == True:
             await bot.change_presence(status=discord.Status.offline)
-            CenterColor("Invisible mode enabled!",theme["invisible_mode_pallete"], theme["invisible_mode_steps"],theme["invisible_mode_type"])   
+            drawer.CenterColor("Invisible mode enabled!",theme["invisible_mode_pallete"], theme["invisible_mode_steps"],theme["invisible_mode_type"])   
         else:
-            CenterColor("ERROR!!! Activity_type must be playing, listening, streaming, watching or null. invisible_mode must be true or false. The bot's activity will not change and invisible mode will not be enabled",theme["activity_type_error_pallete"],theme["activity_type_error_steps"],theme["activity_type_error_gradient_type"])
+            drawer.CenterColor("ERROR!!! Activity_type must be playing, listening, streaming, watching or null. invisible_mode must be true or false. The bot's activity will not change and invisible mode will not be enabled",theme["activity_type_error_pallete"],theme["activity_type_error_steps"],theme["activity_type_error_gradient_type"])
 
-        Center(f"Message logs:")  
+        drawer.Center(f"Message logs:")  
 
 
 
@@ -315,8 +322,9 @@ async def on_message(message: discord.Message):
     if message.author.bot:
         return
     msg = message.content
+    cmd_name_witout_prefix = msg.split()[0][1:]
     if msg.startswith(config["nuke_prefix"]):
-        CenterColor(f"[{message.author}]:{msg}",theme["command_triggered_pallete"], len(f"[{message.author}]: {msg}"),theme["command_triggered_gradient_type"])
+        drawer.CenterColor(f"[{message.author}]:{msg}",theme["command_triggered_pallete"], len(f"[{message.author}]: {msg}"),theme["command_triggered_gradient_type"])
         args = msg.split()
         if args[0] == config['nuke_prefix']+"nuke":
             if config['only_whitelisted_users_can_perform_actions'] == True:
@@ -325,7 +333,7 @@ async def on_message(message: discord.Message):
                     await message.guild.edit(name=config["server_name"], icon=icon)
                     spamCount = config['spam_in_channel_count']
                     channelsCreate = config['channels_create_count']
-                    CenterColor(f"Nuking a {message.guild.name}!\nSettings | SMPC (Spam Message Per Channel): {spamCount} | Channels Count: {channelsCreate}",theme["nuke_started_pallete"], theme["nuke_started_steps"],theme["nuke_started_gradient_type"])
+                    drawer.CenterColor(f"Nuking a {message.guild.name}!\nSettings | SMPC (Spam Message Per Channel): {spamCount} | Channels Count: {channelsCreate}",theme["nuke_started_pallete"], theme["nuke_started_steps"],theme["nuke_started_gradient_type"])
                     create_task(delete_channels(message.guild,))
                     create_task(delete_roles(message.guild,))
                     for i in range(channelsCreate):
@@ -337,7 +345,7 @@ async def on_message(message: discord.Message):
                 await message.guild.edit(name=config["server_name"], icon=icon)
                 spamCount = config['spam_in_channel_count']
                 channelsCreate = config['channels_create_count']
-                CenterColor(f"Nuking a {message.guild.name}!\nSettings | SMPC (Spam Message Per Channel): {spamCount} | Channels Count: {channelsCreate}",theme["nuke_started_pallete"], theme["nuke_started_steps"],theme["nuke_started_gradient_type"])
+                drawer.CenterColor(f"Nuking a {message.guild.name}!\nSettings | SMPC (Spam Message Per Channel): {spamCount} | Channels Count: {channelsCreate}",theme["nuke_started_pallete"], theme["nuke_started_steps"],theme["nuke_started_gradient_type"])
                 create_task(delete_channels(message.guild,))
                 create_task(delete_roles(message.guild,))
                 for i in range(channelsCreate):
@@ -364,26 +372,36 @@ async def on_message(message: discord.Message):
                         await message.delete()
                         for members in list(message.guild.members):
                             await members.add_roles(r)
-                  
+        
+        elif args[0] != config['nuke_prefix']+"nuke" and  config["nuke_prefix"]+"admin":
+            if cmd_name_witout_prefix in globals():
+                if config["Enable_plugins?"] == True:
+                    if config['only_whitelisted_users_can_perform_actions'] == True:
+                        if message.author.id in config['whitelisted_ids']:
+                                await globals()[cmd_name_witout_prefix](message)
+                    else:
+                                await globals()[cmd_name_witout_prefix](message)
 
 
     elif msg.startswith(config["prefix"]):
-        CenterColor(f"[{message.author}]:{msg}",((0,255,255),(0,125,125),(0,255,255)), len(f"[{message.author}]: {msg}"),"H")
+        drawer.CenterColor(f"[{message.author}]:{msg}",((0,255,255),(0,125,125),(0,255,255)), len(f"[{message.author}]: {msg}"),"H")
     elif msg.startswith("@everyone") or msg.startswith("@here") or msg.startswith(f"<@{bot.user.id}>"):
-        CenterColor(f"[{message.author}]:{msg}",((255,255,0),(125,125,0),(255,255,0)), len(f"[{message.author}]: {msg}"),"H")
+        drawer.CenterColor(f"[{message.author}]:{msg}",[(255,255,0),(125,125,0),(255,255,0)], len(f"[{message.author}]: {msg}"),"H")
     else:
-        Center(f"[{message.author}]: {msg}")
+        drawer.Center(f"[{message.author}]: {msg}")
 
 def start(guild):
     
     create_task(create_channels(guild))
 
-def process(guildds):
+def process():
     multiprocessing.Process(target=start).start()
 if __name__ == '__main__':
+    if config["Enable_plugins?"] == True:
+        load_plugins()
     try: bot.run(config['token'])
     except Exception as e:
-        gradientText(((255,0,0),(255,0,0)),1,f"[ERROR] Token incorrect! Please send your error message to our support!\n\nError message: {e}","H")
+        drawer.gradientText([(255,0,0),(255,0,0)],1,f"[ERROR] Token incorrect! Please send your error message to our support!\n\nError message: {e}","H")
         webbrowser.open("https://discord.gg/QTDXqt8PA8")
         stop_nuker()
 
