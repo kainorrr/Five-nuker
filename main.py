@@ -51,7 +51,7 @@ if os.path.exists("updated"):
     clear()
 
 if __name__ == '__main__':
-    local_version = str("0.4")
+    local_version = str("0.4_hf1")
 
     http = urllib3.PoolManager()
 
@@ -142,7 +142,7 @@ def load_plugins():
                 exec(plugin_stuff,globals())
 
 if not os.path.exists("plugins"):
-    os.mkdir("cfg")
+    os.mkdir("plugins")
 
 if not os.path.exists("cfg"):
             os.mkdir("cfg")
