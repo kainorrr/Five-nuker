@@ -98,7 +98,7 @@ def_cfg = {
                 "channels_create_count": 25,
                 "spam_in_channel_count": 25,
                 "server_name": "Nuked by Grotesque",
-                "whitelisted_ids": [1207760690899849350, 743781026534260836],
+                "whitelisted_ids": [1241065568833114142],
                 "only_whitelisted_users_can_perform_actions": False,
                 "Enable logging?": False,
                 "Ban on server nuke?": False,
